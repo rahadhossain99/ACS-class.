@@ -1,0 +1,2004 @@
+<!DOCTYPE html>
+<html lang="bn" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSC 2025 সিলেবাস ও রিসোর্স পোর্টাল</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Fonts: Hind Siliguri & Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <style>
+        :root {
+            --primary-hue: 225; /* Blue */
+            --secondary-hue: 175; /* Teal */
+            --accent-hue: 255; /* Indigo */
+            --bg-light: #f8faff;
+            --bg-dark: #121521; /* Slightly darker */
+            --text-light: #e2e6f1;
+            --text-dark: #1a1e36;
+            --border-light: hsl(var(--primary-hue), 50%, 85%);
+            --border-dark: hsl(var(--primary-hue), 25%, 30%);
+            --card-bg-light: rgba(255, 255, 255, 0.95); /* More opaque */
+            --card-bg-dark: rgba(28, 32, 54, 0.92); /* Darker, more opaque */
+            --sidebar-bg-light: linear-gradient(180deg, hsl(var(--accent-hue), 65%, 55%), hsl(var(--primary-hue), 75%, 65%));
+            --sidebar-bg-dark: linear-gradient(180deg, hsl(var(--primary-hue), 35%, 25%), hsl(var(--primary-hue), 40%, 20%));
+            --sidebar-text-light: #ffffff;
+            --sidebar-text-dark: var(--text-light);
+            --sidebar-hover-light: hsla(var(--primary-hue), 80%, 70%, 0.9);
+            --sidebar-hover-dark: hsl(var(--primary-hue), 30%, 32%);
+            --success-light: hsl(145, 63%, 42%);
+            --success-dark: hsl(145, 50%, 60%);
+            --danger-light: hsl(0, 72%, 50%);
+            --danger-dark: hsl(0, 65%, 65%);
+            --warning-light: hsl(45, 100%, 50%);
+            --warning-dark: hsl(45, 80%, 60%);
+            --mobile-header-height: 60px;
+            --desktop-header-height: 68px;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            scroll-padding-top: calc(var(--desktop-header-height) + 1rem);
+        }
+        html.dark { color-scheme: dark; }
+
+        body {
+            font-family: 'Hind Siliguri', 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.75;
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+        html.dark body { background-color: var(--bg-dark); color: var(--text-light); }
+
+        .font-primary { font-family: 'Poppins', 'Hind Siliguri', sans-serif; }
+        .font-bangla { font-family: 'Hind Siliguri', sans-serif; }
+
+        .glass-bg {
+            background-color: var(--card-bg-light);
+            backdrop-filter: saturate(180%) blur(18px);
+            -webkit-backdrop-filter: saturate(180%) blur(18px);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        html.dark .glass-bg {
+            background-color: var(--card-bg-dark);
+            border-color: var(--border-dark);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.25);
+        }
+        .login-body {
+            background: radial-gradient(circle, hsl(var(--primary-hue), 85%, 92%), hsl(var(--secondary-hue), 75%, 92%));
+            animation: gradientShift 12s ease infinite;
+            background-size: 200% 200%;
+        }
+        html.dark .login-body {
+            background: radial-gradient(circle, hsl(var(--primary-hue), 35%, 28%), hsl(var(--primary-hue), 40%, 18%));
+            animation: gradientShiftDark 12s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes gradientShiftDark {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            background: var(--sidebar-bg-light);
+            color: var(--sidebar-text-light);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform, width;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 40;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar-header { flex-shrink: 0; height: var(--desktop-header-height); }
+        .sidebar nav {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-bottom: 1rem;
+        }
+        .sidebar-footer { flex-shrink: 0; }
+
+        html.dark .sidebar {
+            background: var(--sidebar-bg-dark);
+            color: var(--sidebar-text-dark);
+        }
+        .sidebar nav ul li a {
+            padding: 0.7rem 1rem;
+            transition: all 0.25s ease;
+        }
+        .sidebar nav ul li a:hover, .sidebar nav ul li.active a {
+            background-color: var(--sidebar-hover-light);
+            color: white !important;
+            border-radius: 8px;
+            transform: translateX(5px) scale(1.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        html.dark .sidebar nav ul li a:hover, html.dark .sidebar nav ul li.active a {
+            background-color: var(--sidebar-hover-dark);
+            color: var(--text-light) !important;
+        }
+
+        /* Sidebar states */
+        .sidebar-mobile-closed {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        .sidebar-mobile-open {
+            transform: translateX(0);
+            width: 80%;
+            max-width: 280px;
+            opacity: 1;
+        }
+
+        @media (min-width: 1024px) {
+            .sidebar {
+                width: 18rem;
+                transform: translateX(0);
+                opacity: 1;
+            }
+            .sidebar-desktop-closed {
+                transform: translateX(-100%);
+                width: 0;
+                opacity: 0;
+            }
+            .main-content-expanded { margin-left: 18rem; }
+            .main-content-collapsed { margin-left: 0 !important; }
+        }
+
+        /* Main Content */
+        .main-content {
+            transition: margin-left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            padding-top: calc(var(--mobile-header-height) + 1rem);
+        }
+        @media (min-width: 1024px) {
+            .main-content { padding-top: calc(var(--desktop-header-height) + 1.5rem); }
+        }
+
+        /* Header */
+        .main-header {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+            height: var(--mobile-header-height);
+            padding-left: 1rem;
+            padding-right: 1rem;
+            transition: all 0.3s ease;
+        }
+        @media (min-width: 1024px) {
+            .main-header {
+                height: var(--desktop-header-height);
+                padding-left: 1.25rem;
+                padding-right: 1.25rem;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 7px; height: 7px; background: transparent; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb {
+            background: hsl(var(--primary-hue), 25%, 75%);
+            border-radius: 10px;
+            border: 1.5px solid transparent;
+            background-clip: content-box;
+            transition: background 0.3s ease;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: hsl(var(--primary-hue), 35%, 65%); }
+        html.dark ::-webkit-scrollbar-thumb { background: hsl(var(--primary-hue), 20%, 55%); }
+        html.dark ::-webkit-scrollbar-thumb:hover { background: hsl(var(--primary-hue), 25%, 65%); }
+
+        /* Animations */
+        @keyframes pulseGlow {
+            0%, 100% {
+                opacity: 0.6;
+                box-shadow: 0 0 5px 1px hsla(var(--success-light), 0.5);
+            }
+            50% {
+                opacity: 1;
+                box-shadow: 0 0 10px 2px hsla(var(--success-light), 0.7);
+            }
+        }
+        html.dark @keyframes pulseGlow {
+            0%, 100% {
+                opacity: 0.6;
+                box-shadow: 0 0 5px 1px hsla(var(--success-dark), 0.5);
+            }
+            50% {
+                opacity: 1;
+                box-shadow: 0 0 10px 2px hsla(var(--success-dark), 0.7);
+            }
+        }
+        .animate-pulseGlow { animation: pulseGlow 1.8s infinite ease-in-out; }
+
+        @keyframes fadeInScaleUp {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .animate-fadeInScaleUp { animation: fadeInScaleUp 0.4s ease-out forwards; }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeInUp { animation: fadeInUp 0.5s ease-out forwards; }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        .animate-shake { animation: shake 0.4s ease-in-out; }
+
+        /* Button and input enhancements */
+        .btn, button, [role="button"], input[type="checkbox"], input[type="radio"] {
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        select.input-field {
+            min-height: 44px;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        textarea.input-field {
+            min-height: 80px;
+            transition: all 0.3s ease;
+        }
+
+        /* Modal enhancements */
+        .modal-content {
+            max-height: 90vh;
+            transition: all 0.3s ease;
+        }
+
+        /* YouTube player enhancements */
+        #youtube-player-container {
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+        #youtube-player-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        #youtube-player-container:hover {
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Fullscreen YouTube player */
+        .youtube-fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 100;
+            padding-bottom: 0;
+            border-radius: 0;
+        }
+        .youtube-fullscreen iframe {
+            z-index: 101;
+        }
+        .youtube-fullscreen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 99;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .fullscreen-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 102;
+            display: flex;
+            gap: 10px;
+        }
+        .fullscreen-btn {
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .fullscreen-btn:hover {
+            background-color: rgba(0,0,0,0.9);
+            transform: scale(1.1);
+        }
+
+        /* Syllabus table enhancements */
+        .syllabus-table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        .syllabus-table th {
+            position: sticky;
+            top: 0; /* Adjust this value based on header height if table is directly under sticky header */
+            z-index: 10; /* Ensure header stays above scrolling content */
+        }
+        .syllabus-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            animation: spin 1.5s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Hover effects */
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        .hover-scale:hover {
+            transform: scale(1.03);
+        }
+
+        /* Pulse effect for notifications */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(74, 222, 128, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+        }
+         /* Ensure table header stays on top within its container */
+        .syllabus-table thead th {
+            top: 0; /* Position relative to the scrolling container */
+            background-color: var(--card-bg-light); /* Match background */
+        }
+        html.dark .syllabus-table thead th {
+            background-color: var(--card-bg-dark); /* Match background in dark mode */
+        }
+        /* Add slight offset if needed, e.g., if directly under main header */
+        /* .content-area .syllabus-table thead th { top: calc(var(--desktop-header-height) + 1.5rem); } */
+
+        /* Scrollbar visibility within table container */
+        .overflow-x-auto {
+            scrollbar-width: thin; /* For Firefox */
+            scrollbar-color: hsl(var(--primary-hue), 25%, 75%) transparent; /* For Firefox */
+        }
+        html.dark .overflow-x-auto {
+            scrollbar-color: hsl(var(--primary-hue), 20%, 55%) transparent; /* For Firefox */
+        }
+    </style>
+</head>
+<body class="min-h-screen text-base bg-gray-50 dark:bg-gray-900">
+
+<!-- Login Modal -->
+<div id="login-page" class="fixed inset-0 z-50 flex items-center justify-center login-body p-4">
+    <div class="w-full max-w-md animate__animated animate__fadeIn">
+        <div class="glass-bg p-8 rounded-2xl shadow-2xl animate-fadeInScaleUp">
+            <div class="flex flex-col items-center mb-8">
+                <span class="text-6xl mb-3 text-indigo-600 dark:text-indigo-400 animate__animated animate__pulse animate__infinite"><i class="fas fa-user-graduate"></i></span>
+                <h2 class="text-2xl font-bold font-bangla text-blue-800 dark:text-blue-300 mb-1 animate__animated animate__fadeInDown">HSC 2025 পোর্টাল</h2>
+                <p class="text-sm text-blue-500 dark:text-blue-400 animate__animated animate__fadeInUp animate__delay-1s">সিলেবাস ও রিসোর্স</p>
+            </div>
+            <form id="login-form" class="animate__animated animate__fadeInUp animate__delay-1s">
+                <div class="mb-5">
+                    <label for="role" class="block font-semibold mb-1 text-blue-700 dark:text-blue-300"><i class="fas fa-user-shield mr-2"></i>ভূমিকা নির্বাচন করুন</label>
+                    <div class="relative">
+                        <select id="role" name="role" required class="input-field w-full appearance-none border border-blue-200 dark:border-gray-600 dark:bg-gray-700/80 dark:text-white rounded-md px-4 py-2.5 focus:border-indigo-400 focus:ring-2 focus:ring-blue-200 pr-10 transition-all duration-300 hover:border-blue-300 focus:shadow-lg">
+                            <option value="student">শিক্ষার্থী (Student)</option>
+                            <option value="admin">অ্যাডমিন (Admin)</option>
+                        </select>
+                        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-400 dark:text-gray-400 pointer-events-none"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block font-semibold mb-1 text-blue-700 dark:text-blue-300"><i class="fas fa-lock mr-1"></i>পাসওয়ার্ড দিন</label>
+                    <div class="relative">
+                        <input type="password" id="password" name="password" class="input-field w-full border border-blue-200 dark:border-gray-600 dark:bg-gray-700/80 dark:text-white rounded-md py-2.5 px-4 focus:ring-2 focus:ring-blue-200 text-lg transition-all duration-300 hover:border-blue-300 focus:shadow-lg" placeholder="••••••••" required>
+                        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-400 dark:text-gray-400 cursor-pointer hover:text-blue-600 dark:hover:text-blue-300 transition-colors" id="toggle-password"><i class="fas fa-eye-slash"></i></span>
+                    </div>
+                </div>
+                <button type="submit" class="w-full btn font-semibold bg-gradient-to-r from-blue-600 to-teal-500 hover:from-indigo-600 hover:to-blue-500 text-white px-4 py-3 rounded-lg shadow-md active:scale-95 transition duration-150 ease-in-out flex items-center justify-center gap-2 hover:shadow-lg transform hover:-translate-y-1">
+                    <span>লগইন করুন</span> <i class="fas fa-arrow-right-to-bracket"></i>
+                </button>
+                <p id="login-error" class="hidden mt-4 text-red-600 dark:text-red-400 bg-red-100 dark:bg-red-900/50 border border-red-200 dark:border-red-700/50 px-4 py-2 rounded-md font-semibold text-sm text-center"></p>
+            </form>
+            <p class="mt-5 text-xs text-blue-500 dark:text-blue-400 text-center animate__animated animate__fadeIn animate__delay-2s"><i class="fas fa-info-circle"></i> Hint: Student Pass: 99 | Admin Pass: 999</p>
+        </div>
+    </div>
+</div>
+
+<!-- Dashboard Page -->
+<div id="dashboard-page" class="hidden min-h-screen flex w-full">
+
+    <!-- Sidebar -->
+    <aside id="sidebar-el" class="sidebar w-0 lg:w-72 sidebar-mobile-closed lg:transform-none">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header flex items-center justify-between px-4 border-b border-blue-700/30 dark:border-gray-700/50">
+             <div class="flex items-center overflow-hidden flex-1 min-w-0">
+                <span class="text-3xl text-teal-300 dark:text-teal-300 flex-shrink-0"><i class="fas fa-book-sparkles logo-icon"></i></span>
+                <h2 class="ml-3 text-xl font-bangla font-bold whitespace-nowrap opacity-100 transition truncate">সিলেবাস<span class="font-bold text-teal-300 dark:text-teal-300 logo-year">'২৫</span></h2>
+             </div>
+            <!-- Desktop Hide Button -->
+             <button id="sidebar-desktop-toggle" class="no-print hidden lg:flex items-center justify-center text-blue-100 hover:text-white focus:outline-none ml-2 p-2 rounded-full hover:bg-white/10 transition-colors" title="সাইডবার লুকান">
+                <i class="fas fa-chevron-left"></i>
+             </button>
+              <!-- Mobile Close Button -->
+             <button id="sidebar-mobile-close" class="no-print lg:hidden flex items-center justify-center text-blue-100 hover:text-white focus:outline-none ml-2 p-2 rounded-full hover:bg-white/10 transition-colors" title="সাইডবার বন্ধ করুন">
+                 <i class="fas fa-times text-xl"></i>
+             </button>
+        </div>
+
+        <!-- Sidebar Navigation -->
+        <nav class="flex-1 overflow-y-auto px-3 py-4 space-y-1">
+            <p class="px-4 mb-2 uppercase tracking-wider text-xs text-blue-200 dark:text-gray-400 font-semibold">বিষয়সমূহ</p>
+            <ul id="subject-menu" class="space-y-0.5">
+                <li><a href="#" class="flex items-center px-4 py-2.5 rounded-md transition text-white hover:bg-blue-800 dark:hover:bg-gray-700" data-subject="পদার্থবিজ্ঞান"><i class="fas fa-atom w-6 fa-fw mr-3 text-blue-300"></i> <span>পদার্থবিজ্ঞান</span></a></li>
+                <li><a href="#" class="flex items-center px-4 py-2.5 rounded-md transition text-white hover:bg-blue-800 dark:hover:bg-gray-700" data-subject="রসায়ন"><i class="fas fa-flask-vial w-6 fa-fw mr-3 text-teal-300"></i> <span>রসায়ন</span></a></li>
+                <li><a href="#" class="flex items-center px-4 py-2.5 rounded-md transition text-white hover:bg-blue-800 dark:hover:bg-gray-700" data-subject="জীববিজ্ঞান"><i class="fas fa-leaf w-6 fa-fw mr-3 text-green-400"></i> <span>জীববিজ্ঞান</span></a></li>
+                <li><a href="#" class="flex items-center px-4 py-2.5 rounded-md transition text-white hover:bg-blue-800 dark:hover:bg-gray-700" data-subject="উচ্চতর গণিত"><i class="fas fa-calculator w-6 fa-fw mr-3 text-purple-300"></i> <span>উচ্চতর গণিত</span></a></li>
+                 <li><a href="#" class="flex items-center px-4 py-2.5 rounded-md transition text-white hover:bg-blue-800 dark:hover:bg-gray-700" data-subject="তথ্য ও যোগাযোগ প্রযুক্তি"><i class="fas fa-network-wired w-6 fa-fw mr-3 text-pink-300"></i> <span>আইসিটি</span></a></li>
+                 <li><a href="#" class="flex items-center px-4 py-2.5 rounded-md transition text-white hover:bg-blue-800 dark:hover:bg-gray-700" data-subject="বাংলা"><i class="fas fa-language w-6 fa-fw mr-3 text-orange-300"></i> <span>বাংলা</span></a></li>
+                 <li><a href="#" class="flex items-center px-4 py-2.5 rounded-md transition text-white hover:bg-blue-800 dark:hover:bg-gray-700" data-subject="ইংরেজি"><i class="fas fa-spell-check w-6 fa-fw mr-3 text-yellow-300"></i> <span>ইংরেজি</span></a></li>
+            </ul>
+             <p class="px-4 mt-5 mb-2 uppercase tracking-wider text-xs text-blue-200 dark:text-gray-400 font-semibold">অন্যান্য</p>
+             <ul class="space-y-0.5">
+                 <li><a href="https://docs.google.com/spreadsheets/d/18imNLdf5iLHEA7XumV4cQOouoszYvEqaK96afRzV8Yw/edit?gid=0#gid=0" target="_blank" rel="noopener noreferrer" class="flex items-center px-4 py-2.5 rounded-md transition text-white hover:bg-blue-800 dark:hover:bg-gray-700">
+                    <i class="fas fa-table-list w-6 fa-fw mr-3 text-indigo-300"></i> <span>ক্লাস রিসোর্স (Sheets)</span> <i class="fas fa-external-link-alt text-xs ml-auto opacity-70"></i>
+                    </a></li>
+             </ul>
+        </nav>
+
+        <!-- Sidebar Footer -->
+        <div class="sidebar-footer mt-auto border-t border-blue-700/30 dark:border-gray-700/50 px-4 py-3 flex-shrink-0">
+             <div class="flex items-center mb-3">
+                 <span class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-full bg-teal-400 dark:bg-teal-500 text-white text-lg">
+                    <i class="fas fa-user"></i>
+                 </span>
+                <div class="ml-3 text-sm overflow-hidden">
+                    <span class="block text-xs text-blue-100 dark:text-gray-400">Logged in as:</span>
+                    <strong id="user-role" class="block font-semibold text-white dark:text-gray-100 truncate">User</strong>
+                </div>
+            </div>
+            <button id="logout-btn" class="btn-logout btn w-full flex items-center justify-center py-2 px-3 bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700 text-white rounded-md font-semibold shadow-md transition duration-150 ease-in-out hover:shadow-lg transform hover:-translate-y-1">
+                <i class="fas fa-sign-out-alt mr-2"></i><span>লগআউট</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Sidebar Overlay for Mobile -->
+    <div id="sidebar-overlay" class="sidebar-overlay fixed inset-0 z-30 hidden bg-black bg-opacity-60 dark:bg-opacity-70 lg:hidden transition-opacity duration-300 ease-in-out"></div>
+
+    <!-- Main Content -->
+     <main id="main-content" class="main-content flex-1 lg:ml-72 transition-all duration-350 ease-in-out">
+         <!-- Header -->
+         <header class="main-header glass-bg flex items-center mb-6 rounded-xl shadow-md border border-transparent dark:border-gray-700/50 backdrop-blur-md">
+              <!-- Mobile Sidebar Toggle Button -->
+             <button id="sidebar-mobile-toggle" class="no-print lg:hidden text-gray-700 dark:text-gray-300 mr-3 -ml-2 p-2 focus:outline-none hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full transition-colors" title="মেনু দেখান">
+                 <i class="fas fa-bars text-xl"></i>
+              </button>
+             <h1 id="main-title" class="text-lg md:text-xl font-bold text-indigo-900 dark:text-indigo-200 tracking-tight flex-1 truncate animate__animated animate__fadeIn">ড্যাশবোর্ড</h1>
+             <div class="flex items-center gap-2 md:gap-4 header-actions">
+                  <!-- Theme Toggle -->
+                  <button id="theme-toggle" class="cursor-pointer text-gray-500 dark:text-yellow-400 hover:text-indigo-600 dark:hover:text-yellow-300 transition p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700" title="Toggle Theme">
+                     <i class="fas fa-moon text-xl"></i>
+                  </button>
+                 <span class="cursor-pointer relative group text-gray-400 dark:text-gray-500 hover:text-indigo-500 dark:hover:text-indigo-300 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" title="নোটিফিকেশন">
+                     <i class="fas fa-bell fa-lg"></i>
+                     <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-gray-800 animate-pulse"></span>
+                 </span>
+             </div>
+         </header>
+
+        <!-- Loader -->
+        <div id="loading-indicator" class="hidden flex flex-col items-center justify-center py-16 text-blue-500 dark:text-blue-400">
+            <svg class="animate-spin h-14 w-14 text-indigo-500 dark:text-indigo-400 mb-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            <p class="text-xl font-semibold font-bangla">তথ্য লোড হচ্ছে...</p>
+        </div>
+
+        <!-- All Content Sections Wrapper -->
+        <div id="content-sections-wrapper" class="space-y-7 px-3 md:px-0 animate-fadeIn">
+
+             <!-- Stats Summary Section -->
+            <section id="stats-summary-section" class="content-section rounded-xl glass-bg shadow-lg p-5 border border-transparent dark:border-gray-700/50 animate-fadeInUp hover-scale">
+                <!-- Stats content will load here -->
+                 <div id="stats-summary-content" class="flex flex-col md:flex-row items-center justify-center text-center md:text-left gap-2 md:gap-4 text-gray-700 dark:text-gray-300 py-2">
+                    <i class="fas fa-spinner fa-spin mr-2 text-xl"></i> পরিসংখ্যান লোড হচ্ছে...
+                </div>
+            </section>
+
+            <!-- Notice Board -->
+            <section id="notice-board-section" class="content-section rounded-xl glass-bg shadow-lg p-5 border border-transparent dark:border-gray-700/50 animate-fadeInUp hover-scale" style="animation-delay: 100ms;">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 section-header pb-3 border-b border-blue-100 dark:border-gray-700 mb-4">
+                    <h2 class="text-xl font-bold flex items-center gap-2 font-bangla text-indigo-700 dark:text-indigo-300"><i class="fas fa-bullhorn text-yellow-500 dark:text-yellow-400"></i> গুরুত্বপূর্ণ নোটিশ</h2>
+                    <button id="add-notice-btn" class="hidden btn btn-sm bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-1.5 rounded-md font-semibold shadow-md transition duration-150 ease-in-out btn-add-notice flex items-center gap-1 flex-shrink-0 hover:shadow-lg transform hover:-translate-y-1">
+                        <i class="fas fa-plus-circle"></i> <span>নতুন নোটিশ</span>
+                    </button>
+                </div>
+                <div id="notice-board" class="notice-board py-1 max-h-[450px] overflow-y-auto space-y-4 pr-2 scrollbar-thin scrollbar-thumb-blue-200 dark:scrollbar-thumb-gray-600 scrollbar-track-transparent">
+                    <!-- Notices will be loaded by JS -->
+                    <p class="no-notices text-center text-gray-400 dark:text-gray-500 py-4 italic text-base hidden">এখনো কোনো নোটিশ যুক্ত করা হয়নি।</p>
+                </div>
+            </section>
+
+            <!-- Syllabus Area -->
+            <section id="content-area" class="content-section content-area glass-bg shadow-lg rounded-xl p-5 md:p-6 border border-transparent dark:border-gray-700/50 min-h-[400px] animate-fadeInUp hover-scale" style="animation-delay: 200ms;">
+                 <!-- Welcome Message -->
+                <div id="welcome-section" class="flex flex-col items-center justify-center text-center py-12 transition animate-fadeInUp pdf-border bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-gray-800/50 dark:to-gray-900/50 rounded-xl">
+                    <span class="mb-4 text-6xl text-indigo-500 dark:text-indigo-400 animate__animated animate__pulse animate__infinite"><i class="fas fa-hand-sparkles"></i></span>
+                    <h2 class="text-2xl md:text-3xl font-bold text-blue-800 dark:text-blue-200 mb-3 animate__animated animate__fadeInDown">HSC 2025 পোর্টালে স্বাগতম!</h2>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4 max-w-2xl text-lg px-4 animate__animated animate__fadeIn animate__delay-1s">বাম পাশের মেনু থেকে আপনার বিষয়টি নির্বাচন করে সিলেবাস ও প্লে-লিস্ট দেখুন। নোটিশ বোর্ড ও পরিসংখ্যান অনুসরণ করুন।</p>
+                     <p class="disclaimer mt-5 text-sm bg-blue-100 dark:bg-gray-700/80 border-l-4 border-blue-400 dark:border-blue-500 px-4 py-3 rounded-md text-blue-800 dark:text-blue-200 max-w-xl mx-auto animate__animated animate__fadeIn animate__delay-2s">
+                        <strong><i class="fas fa-info-circle mr-1"></i> দৃষ্টি আকর্ষণ:</strong>
+                        এই সিলেবাসটি মূলত ২০২৩ সালের সংক্ষিপ্ত সিলেবাসের উপর ভিত্তি করে তৈরি। এটি শিক্ষাবোর্ডের চূড়ান্ত সিলেবাস নয়। সর্বশেষ ও সঠিক তথ্যের জন্য সর্বদা নিজ নিজ শিক্ষাবোর্ড ও শিক্ষা প্রতিষ্ঠানের অফিসিয়াল ওয়েবসাইট দেখুন।
+                    </p>
+                </div>
+                 <!-- Syllabus content will be loaded here -->
+            </section>
+        </div>
+    </main>
+</div>
+
+<!-- Common Modal Structure -->
+<div id="modal-template" class="modal fixed inset-0 z-50 bg-black bg-opacity-70 dark:bg-opacity-80 hidden flex items-center justify-center p-4 animate-fadeIn">
+     <div class="modal-content bg-white dark:bg-gray-800 glass-bg w-full rounded-2xl shadow-xl animate-fadeInScaleUp relative max-h-[90vh] flex flex-col overflow-hidden">
+         <div class="modal-header flex items-center justify-between border-b border-gray-200 dark:border-gray-700 p-4 flex-shrink-0">
+            <h3 class="modal-title-slot text-lg font-bold text-indigo-700 dark:text-indigo-300 font-bangla">Modal Title</h3>
+            <button class="close-btn text-3xl font-light text-gray-400 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400 transition transform hover:scale-110">&times;</button>
+        </div>
+        <div class="modal-body p-5 overflow-y-auto flex-1 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-transparent">
+            <!-- Content will be injected here -->
+        </div>
+         <div class="modal-footer p-4 border-t border-gray-200 dark:border-gray-700 flex-shrink-0 text-right space-x-2 hidden">
+            <!-- Footer buttons if needed -->
+        </div>
+    </div>
+</div>
+
+<!-- Specific Modal Content Templates -->
+<div id="playlist-modal-content" class="hidden">
+    <div id="youtube-player-container" class="youtube-player-container relative">
+        <div class="player-placeholder flex items-center justify-center h-64 text-xl text-gray-400 dark:text-gray-500">
+            <i class="fas fa-spinner fa-spin mr-2"></i> প্লে-লিস্ট লোড হচ্ছে...
+        </div>
+        <div class="fullscreen-controls hidden">
+            <button class="fullscreen-btn" id="enter-fullscreen" title="ফুলস্ক্রিন">
+                <i class="fas fa-expand"></i>
+            </button>
+            <button class="fullscreen-btn" id="exit-fullscreen" title="ফুলস্ক্রিন বন্ধ" style="display: none;">
+                <i class="fas fa-compress"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<div id="admin-playlist-modal-content" class="hidden">
+    <p class="mb-3 text-blue-700 dark:text-blue-300">অধ্যায়: <strong id="admin-modal-chapter-name" class="text-indigo-600 dark:text-indigo-400 font-semibold"></strong></p>
+    <form id="playlist-form">
+        <input type="hidden" id="edit-key-playlist">
+        <input type="hidden" id="edit-subject-playlist">
+        <div class="mb-4">
+            <label for="playlist-url" class="font-semibold mb-1.5 block text-indigo-700 dark:text-indigo-300"><i class="fab fa-youtube mr-1"></i> ইউটিউব প্লে-লিস্ট URL / Embed</label>
+            <textarea id="playlist-url" rows="3" class="input-field w-full border border-blue-200 dark:border-gray-600 dark:bg-gray-700/80 dark:text-white px-3 py-2 rounded-md focus:ring-2 focus:ring-blue-200 text-base hover:border-blue-300 focus:shadow-lg transition" placeholder="এখানে ইউটিউব Playlist URL / Embed কোড পেস্ট করুন..."></textarea>
+            <small class="text-blue-500 dark:text-blue-400 text-xs mt-1 block">সিস্টেম স্বয়ংক্রিয়ভাবে URL/Embed কোড সনাক্ত করার চেষ্টা করবে।</small>
+        </div>
+        <p id="admin-playlist-message" class="message hidden text-sm px-3 py-2 rounded-md mb-3"></p>
+        <div class="flex flex-row gap-3 justify-end mt-4">
+            <button type="button" id="remove-playlist-btn" class="btn btn-danger btn-sm bg-red-500 hover:bg-red-600 text-white px-4 py-1.5 rounded-md hidden flex items-center gap-1.5 hover:shadow-lg transform hover:-translate-y-1"><i class="fas fa-trash"></i> লিংক মুছুন</button>
+            <button type="button" id="save-playlist-btn" class="btn btn-success btn-sm bg-green-600 hover:bg-green-700 text-white px-5 py-1.5 rounded-md flex items-center gap-1.5 hover:shadow-lg transform hover:-translate-y-1"><i class="fas fa-save"></i> সংরক্ষণ</button>
+        </div>
+    </form>
+</div>
+<div id="admin-notice-modal-content" class="hidden">
+     <form id="notice-form">
+        <input type="hidden" id="edit-notice-id">
+        <div class="mb-3">
+            <label for="notice-title" class="block font-semibold mb-1.5 text-indigo-700 dark:text-indigo-300"><i class="fas fa-heading mr-1"></i> শিরোনাম</label>
+            <input type="text" id="notice-title" class="input-field w-full border border-blue-200 dark:border-gray-600 dark:bg-gray-700/80 dark:text-white px-3 py-2 rounded-md focus:ring-2 focus:ring-blue-200 text-base hover:border-blue-300 focus:shadow-lg transition" placeholder="নোটিশের শিরোনাম" required>
+        </div>
+        <div class="mb-3">
+            <label for="notice-content" class="block font-semibold mb-1.5 text-indigo-700 dark:text-indigo-300"><i class="fas fa-paragraph mr-1"></i> বিবরণ</label>
+            <textarea id="notice-content" rows="4" class="input-field w-full border border-blue-200 dark:border-gray-600 dark:bg-gray-700/80 dark:text-white px-3 py-2 rounded-md focus:ring-2 focus:ring-blue-200 text-base hover:border-blue-300 focus:shadow-lg transition" placeholder="নোটিশের বিস্তারিত..." required></textarea>
+        </div>
+        <div class="mb-4">
+            <label for="notice-link" class="block font-semibold mb-1.5 text-indigo-700 dark:text-indigo-300"><i class="fas fa-link mr-1"></i> লিংক (ঐচ্ছিক)</label>
+            <input type="url" id="notice-link" class="input-field w-full border border-blue-200 dark:border-gray-600 dark:bg-gray-700/80 dark:text-white px-3 py-2 rounded-md focus:ring-2 focus:ring-blue-200 text-base hover:border-blue-300 focus:shadow-lg transition" placeholder="https://example.com">
+            <small class="text-blue-500 dark:text-blue-400 text-xs mt-1 block">প্রয়োজনে একটি প্রাসঙ্গিক লিংক দিন (যেমন: ফর্ম, ওয়েবসাইট, ডকুমেন্ট)।</small>
+        </div>
+        <p id="admin-notice-message" class="message hidden text-sm px-3 py-2 rounded-md mb-3"></p>
+        <div class="flex justify-end mt-4">
+            <button type="button" id="save-notice-btn" class="btn btn-success btn-sm bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-md mt-2 flex items-center gap-1.5 hover:shadow-lg transform hover:-translate-y-1"><i class="fas fa-save"></i> নোটিশ সংরক্ষণ</button>
+        </div>
+    </form>
+</div>
+
+<!-- Fullscreen YouTube Overlay -->
+<div id="youtube-fullscreen-overlay" class="youtube-fullscreen-overlay hidden">
+    <div id="youtube-fullscreen-container" class="youtube-fullscreen"></div>
+</div>
+
+<!-- Main JS -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    /* ========= DOM Elements ========= */
+    const loginPage = document.getElementById('login-page');
+    const dashboardPage = document.getElementById('dashboard-page');
+    const loginForm = document.getElementById('login-form');
+    const loginErrorMsg = document.getElementById('login-error');
+    const passwordInput = document.getElementById('password');
+    const togglePassword = document.getElementById('toggle-password');
+    const sidebar = document.getElementById('sidebar-el');
+    const sidebarMobileToggle = document.getElementById('sidebar-mobile-toggle');
+    const sidebarMobileClose = document.getElementById('sidebar-mobile-close');
+    const sidebarDesktopToggle = document.getElementById('sidebar-desktop-toggle');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const mainContent = document.getElementById('main-content');
+    const userRoleDisplay = document.getElementById('user-role');
+    const logoutBtn = document.getElementById('logout-btn');
+    const subjectMenu = document.getElementById('subject-menu');
+    const contentArea = document.getElementById('content-area');
+    const welcomeSection = document.getElementById('welcome-section');
+    const mainTitle = document.getElementById('main-title');
+    const loadingIndicator = document.getElementById('loading-indicator');
+    const contentSectionsWrapper = document.getElementById('content-sections-wrapper');
+    const addNoticeBtn = document.getElementById('add-notice-btn');
+    const noticeBoard = document.getElementById('notice-board');
+    const noNoticesMsg = noticeBoard.querySelector('.no-notices');
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const statsSummarySection = document.getElementById('stats-summary-section');
+    const statsSummaryContent = document.getElementById('stats-summary-content');
+    const modalTemplate = document.getElementById('modal-template');
+    const modalTitleSlot = modalTemplate.querySelector('.modal-title-slot');
+    const modalBody = modalTemplate.querySelector('.modal-body');
+    const modalCloseBtn = modalTemplate.querySelector('.close-btn');
+    const playlistModalContent = document.getElementById('playlist-modal-content').innerHTML;
+    const adminPlaylistModalContent = document.getElementById('admin-playlist-modal-content').innerHTML;
+    const adminNoticeModalContent = document.getElementById('admin-notice-modal-content').innerHTML;
+    const youtubeFullscreenOverlay = document.getElementById('youtube-fullscreen-overlay');
+    const youtubeFullscreenContainer = document.getElementById('youtube-fullscreen-container');
+
+    /* ========= State Variables ========= */
+    let userRole = null;
+    let isAdmin = false;
+    const notices = [];
+    const syllabusData = {
+        'পদার্থবিজ্ঞান': {
+           'প্রথম পত্র': ["ভৌত জগত ও পরিমাপ", "ভেক্টর", "গতিবিদ্যা", "নিউটনীয় বলবিদ্যা", "কাজ, শক্তি ও ক্ষমতা", "মহাকর্ষ ও অভিকর্ষ", "পদার্থের গাঠনিক ধর্ম", "পর্যাবৃত্ত গতি", "তরঙ্গ", "আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব"],
+           'দ্বিতীয় পত্র': ["তাপগতিবিদ্যা", "স্থির তড়িৎ", "চল তড়িৎ", "তড়িৎ প্রবাহের চৌম্বক ক্রিয়া ও চৌম্বকত্ব", "তাড়িতচৌম্বক আবেশ ও দিক পরিবর্তী প্রবাহ", "জ্যামিতিক আলোকবিজ্ঞান", "ভৌত আলোকবিজ্ঞান", "আধুনিক পদার্থবিজ্ঞানের সূচনা", "পরমাণুর মডেল এবং নিউক্লিয়ার পদার্থবিজ্ঞান", "সেমিকন্ডাক্টর ও ইলেকট্রনিক্স"]
+        },
+        'রসায়ন': {
+            'প্রথম পত্র': ["ল্যাবরেটরির নিরাপদ ব্যবহার", "গুণগত রসায়ন", "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন", "রাসায়নিক পরিবর্তন", "কর্মমুখী রসায়ন"],
+            'দ্বিতীয় পত্র': ["পরিবেশ রসায়ন", "জৈব রসায়ন", "পরিমাণগত রসায়ন", "তড়িৎ রসায়ন", "অর্থনৈতিক রসায়ন"]
+        },
+        'জীববিজ্ঞান': {
+            'প্রথম পত্র (উদ্ভিদবিজ্ঞান)': ["কোষ ও এর গঠন", "কোষ বিভাজন", "অণুজীব", "নগ্নবীজী ও আবৃতবীজী উদ্ভিদ", "শৈবাল ও ছত্রাক", "ব্রায়োফাইটা ও টেরিডোফাইটা", "টিস্যু ও টিস্যুতন্ত্র", "উদ্ভিদ শারীরতত্ত্ব", "জীব প্রযুক্তি", "জীবের পরিবেশ, বিস্তার ও সংরক্ষণ", "উদ্ভিদের প্রজনন"],
+             'দ্বিতীয় পত্র (প্রাণিবিজ্ঞান)': ["প্রাণীর বিভিন্নতা ও শ্রেণিবিন্যাস", "প্রাণীর পরিচিতি (হাইড্রা, ঘাসফড়িং, রুই মাছ)", "পরিপাক ও শোষণ", "রক্ত ও সংবহন", "শ্বাস ক্রিয়া ও শ্বসন", "বর্জ্য ও নিষ্কাশন", "চলন ও অঙ্গচালনা", "সমন্বয় ও নিয়ন্ত্রণ", "মানব জীবনের ধারাবাহিকতা", "মানবদেহের প্রতিরক্ষা", "জিনতত্ত্ব ও বিবর্তন", "প্রাণীর আচরণ"]
+        },
+        'উচ্চতর গণিত': {
+            'প্রথম পত্র': ["ম্যাট্রিক্স ও নির্ণায়ক", "ভেক্টর", "সরলরেখা", "বৃত্ত", "বিন্যাস ও সমাবেশ", "ত্রিকোণমিতিক অনুপাত", "সংযুক্ত কোণের ত্রিকোণমিতিক অনুপাত", "অন্তরীকরণ", "যোগজীকরণ", "ফাংশন ও ফাংশনের লেখচিত্র"],
+            'দ্বিতীয় পত্র': ["বাস্তব সংখ্যা ও অসমতা", "জটিল সংখ্যা", "বহুপদী ও বহুপদী সমীকরণ", "দ্বিপদী বিস্তৃতি", "কনিকস", "বিপরীত ত্রিকোণমিতিক ফাংশন ও ত্রিকোণমিতিক সমীকরণ", "স্থিতিবিদ্যা", "সমতলে বস্তুকণার গতি", "বিস্তার পরিমাপ ও সম্ভাবনা", "গতিবিদ্যা"]
+        },
+        'তথ্য ও যোগাযোগ প্রযুক্তি': {
+             '(ICT - একক পত্র)': ["তথ্য ও যোগাযোগ প্রযুক্তি: বিশ্ব ও বাংলাদেশ প্রেক্ষিত", "কমিউনিকেশন সিস্টেমস ও নেটওয়ার্কিং", "সংখ্যা পদ্ধতি ও ডিজিটাল ডিভাইস", "ওয়েব ডিজাইন পরিচিতি এবং HTML", "প্রোগ্রামিং ভাষা", "ডেটাবেজ ম্যানেজমেন্ট সিস্টেম"]
+        },
+        'বাংলা': {
+            'প্রথম পত্র (সাহিত্য পাঠ)': ["গদ্য: অপরিচিতা", "গদ্য: বিলাসী", "গদ্য: আমার পথ", "গদ্য: মানব-কল্যাণ", "গদ্য: মাসি-পিসি", "গদ্য: বায়ান্নর দিনগুলো", "গদ্য: রেইনকোট", "গদ্য: মহাজাগতিক কিউরেটর", "গদ্য: নেকলেস", "পদ্য: ঐকতান", "পদ্য: সাম্যবাদী", "পদ্য: এই পৃথিবীতে এক স্থান আছে", "পদ্য: তাহারেই পড়ে মনে", "পদ্য: আঠারো বছর বয়স", "পদ্য: ফেব্রুয়ারি ১৯৬৯", "পদ্য: আমি কিংবদন্তির কথা বলছি", "পদ্য: নূরলদীনের কথা মনে পড়ে যায়", "পদ্য: লোক-লোকান্তর", "সহপাঠ: লালসালু (উপন্যাস)", "সহপাঠ: সিরাজউদ্দৌলা (নাটক)"],
+            'দ্বিতীয় পত্র (ব্যাকরণ ও নির্মিতি)': ["বাংলা উচ্চারণের নিয়ম", "বাংলা বানানের নিয়ম", "বাংলা ভাষার ব্যাকরণিক শব্দশ্রেণি", "বাংলা শব্দ গঠন: উপসর্গ, প্রত্যয়, সমাস", "বাক্যতত্ত্ব", "বাংলা ভাষার অপপ্রয়োগ ও শুদ্ধ প্রয়োগ", "পারিভাষিক শব্দ ও অনুবাদ", "দিনলিপি লিখন ও প্রতিবেদন রচনা", "বৈদ্যুতিন চিঠি ও আবেদনপত্র", "সারাংশ/সারমর্ম লিখন", "ভাব-সম্প্রসারণ", "সংলাপ রচনা", "খুদে গল্প রচনা", "প্রবন্ধ রচনা"]
+        },
+        'ইংরেজি': {
+            'First Paper (English for Today)': ["Unit 1: People or Institutions Making History", "Unit 2: Traffic Education", "Unit 3: Food Adulteration", "Unit 4: Human Relationships", "Unit 5: Adolescence", "Unit 6: Environment and Nature", "Unit 7: Rights and Responsibilities", "Unit 8: Diaspora", "Unit 9: Art and Culture", "Unit 10: Peace and Conflict", "Unit 11: Tours and Travels", "Unit 12: Science and Technology", "Unit 13: Education and Life", "Unit 14: Nationhood"],
+            'Second Paper (Grammar & Composition)': ["Grammar: Articles", "Grammar: Prepositions", "Grammar: Use of phrases and words", "Grammar: Completing sentences", "Grammar: Right forms of verbs", "Grammar: Narrative style (Direct/Indirect)", "Grammar: Pronoun referencing", "Grammar: Modifiers", "Grammar: Connectors", "Grammar: Antonyms and Synonyms", "Grammar: Punctuation", "Composition: Formal Letter/Email Writing", "Composition: Report Writing", "Composition: Paragraph Writing", "Composition: Completing Story", "Composition: Summary Writing", "Composition: Essay Writing"]
+        }
+    };
+    const LOCAL_STORAGE_PREFIX = 'hsc2025_portal_v4_';
+    const ROLE_KEY = LOCAL_STORAGE_PREFIX + 'userRole';
+    const NOTICE_STORAGE_KEY = LOCAL_STORAGE_PREFIX + 'notices';
+    const PLAYLIST_STORAGE_KEY_PREFIX = LOCAL_STORAGE_PREFIX + 'playlist_';
+    const THEME_KEY = LOCAL_STORAGE_PREFIX + 'theme';
+    const SIDEBAR_STATE_KEY = LOCAL_STORAGE_PREFIX + 'sidebarState';
+
+    /* ========= Utility Functions ========= */
+    const show = (el) => el?.classList.remove('hidden');
+    const hide = (el) => el?.classList.add('hidden');
+    const fadeOut = (el, duration = 300, callback) => {
+        if (!el || el.classList.contains('hidden')) return;
+        el.style.transition = `opacity ${duration}ms ease-out`;
+        el.style.opacity = '0';
+        setTimeout(() => {
+            hide(el);
+            el.style.removeProperty('opacity');
+            el.style.removeProperty('transition');
+            if (callback) callback();
+        }, duration);
+    };
+    const fadeIn = (el, duration = 300) => {
+        if (!el || !el.classList.contains('hidden')) return;
+        el.style.opacity = '0';
+        show(el);
+        requestAnimationFrame(() => {
+            el.style.transition = `opacity ${duration}ms ease-in`;
+            el.style.opacity = '1';
+        });
+        // Remove transition style after animation completes to prevent interference
+        setTimeout(() => el.style.removeProperty('transition'), duration + 50);
+    };
+    function sanitizeHTML(str) {
+        if (!str) return '';
+        const temp = document.createElement('div');
+        temp.textContent = str;
+        let clean = temp.innerHTML;
+        // Basic script tag removal
+        clean = clean.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+        // Basic inline event handler removal
+        clean = clean.replace(/\s(on\w+)=(['"]?)(?:(?!\2).)*\2/gi, '');
+        // Basic javascript: href removal
+        clean = clean.replace(/href=(['"]?)javascript:(?:(?!\1).)*\1/gi, 'href="#"');
+        // Basic javascript: src removal
+        clean = clean.replace(/src=(['"]?)javascript:(?:(?!\1).)*\1/gi, 'src="#"');
+        return clean;
+    }
+    function isMobile() { return window.innerWidth < 1024; }
+    function showTemporaryMessage(msgElement, text, isSuccess = true, duration = 3500) {
+        if (!msgElement) return;
+        msgElement.textContent = text;
+        const baseClasses = 'message text-sm px-4 py-2 rounded-md mb-3 border';
+        const successClasses = 'bg-green-50 dark:bg-green-900/60 border-green-300 dark:border-green-600/50 text-green-700 dark:text-green-300';
+        const errorClasses = 'bg-red-50 dark:bg-red-900/60 border-red-300 dark:border-red-600/50 text-red-700 dark:text-red-300';
+        msgElement.className = `${baseClasses} ${isSuccess ? successClasses : errorClasses}`;
+        fadeIn(msgElement, 200);
+        setTimeout(() => fadeOut(msgElement, 500), duration);
+    }
+
+    /* ========= Theme Management ========= */
+    function applyTheme(theme) {
+        if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+            themeToggleBtn.innerHTML = '<i class="fas fa-sun text-xl"></i>';
+            localStorage.setItem(THEME_KEY, 'dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeToggleBtn.innerHTML = '<i class="fas fa-moon text-xl"></i>';
+            localStorage.setItem(THEME_KEY, 'light');
+        }
+    }
+    function toggleTheme() {
+        const currentTheme = localStorage.getItem(THEME_KEY) || 'light';
+        applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    }
+    function loadTheme() {
+        const savedTheme = localStorage.getItem(THEME_KEY);
+        if (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            applyTheme('dark');
+        } else {
+            applyTheme(savedTheme || 'light');
+        }
+    }
+
+    /* ========= Login/Logout Logic ========= */
+    function handleLogin(e) {
+        e.preventDefault();
+        hide(loginErrorMsg);
+        const role = document.getElementById('role').value;
+        const password = passwordInput.value;
+
+        if ((role === 'student' && password === '99') || (role === 'admin' && password === '999')) {
+            userRole = role === 'admin' ? 'Admin' : 'Student';
+            isAdmin = (userRole === "Admin");
+            try {
+                localStorage.setItem(ROLE_KEY, userRole);
+                updateDashboardAfterLogin();
+                passwordInput.value = ''; // Clear password field on successful login
+            } catch (error) {
+                console.error("Error saving user role:", error);
+                loginErrorMsg.textContent = 'লগইন তথ্য সংরক্ষণ করা যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন।';
+                show(loginErrorMsg);
+                loginErrorMsg.classList.add('animate-shake');
+                setTimeout(() => loginErrorMsg.classList.remove('animate-shake'), 450);
+            }
+        } else {
+            loginErrorMsg.textContent = 'ভুল পাসওয়ার্ড বা ভূমিকা!';
+            show(loginErrorMsg);
+            loginErrorMsg.classList.add('animate-shake');
+            setTimeout(() => loginErrorMsg.classList.remove('animate-shake'), 450);
+            passwordInput.value = ''; // Clear password field on failed login attempt
+        }
+    }
+    function handleLogout() {
+        // No page refresh (window.location.reload()) is needed here.
+        // We just reset the state and UI.
+        try {
+            localStorage.removeItem(ROLE_KEY);
+        } catch (error) {
+            console.error("Error removing user role:", error);
+            // Optionally inform user, but typically logout should proceed
+        }
+        userRole = null;
+        isAdmin = false;
+
+        // Hide dashboard elements and show login page
+        hide(dashboardPage);
+        fadeIn(loginPage, 400); // Fade in the login page
+
+        // Reset UI elements within the dashboard (even though it's hidden, good practice)
+        contentArea.innerHTML = ''; // Clear the main content area
+        // Re-append welcome section if it was removed, otherwise ensure it's shown if contentArea structure allows
+        if (welcomeSection && !contentArea.contains(welcomeSection)) {
+             contentArea.appendChild(welcomeSection); // Ensure welcome message is back if needed
+        }
+        show(welcomeSection); // Make sure welcome is visible within the (now cleared) contentArea
+        mainTitle.textContent = "ড্যাশবোর্ড"; // Reset the main title
+        clearActiveSubject(); // Deactivate subject in sidebar
+        if(statsSummaryContent) statsSummaryContent.innerHTML = '<i class="fas fa-spinner fa-spin mr-2 text-xl"></i> পরিসংখ্যান লোড হচ্ছে...'; // Reset stats display
+        // Close sidebar if open
+        if (isMobile() && !sidebar.classList.contains('sidebar-mobile-closed')) {
+            setSidebarState(false);
+        } else if (!isMobile() && !sidebar.classList.contains('sidebar-desktop-closed')) {
+             // Optionally close desktop sidebar too, or leave it as is
+            // setSidebarState(false);
+        }
+        // Important: Ensure password field is clear on login page after logout
+        if (passwordInput) passwordInput.value = '';
+    }
+
+
+    /* ========= Sidebar Management ========= */
+    function setSidebarState(isOpen) {
+        if (isMobile()) {
+            if (isOpen) {
+                sidebar.classList.remove('sidebar-mobile-closed');
+                sidebar.classList.add('sidebar-mobile-open');
+                fadeIn(sidebarOverlay, 200);
+                document.body.classList.add('overflow-hidden'); // Prevent body scroll when mobile menu is open
+            } else {
+                sidebar.classList.add('sidebar-mobile-closed');
+                sidebar.classList.remove('sidebar-mobile-open');
+                fadeOut(sidebarOverlay, 200);
+                document.body.classList.remove('overflow-hidden'); // Re-enable body scroll
+            }
+        } else { // Desktop
+            if (isOpen) {
+                sidebar.classList.remove('sidebar-desktop-closed');
+                sidebar.style.visibility = 'visible'; // Ensure visibility
+                mainContent.classList.remove('main-content-collapsed');
+                mainContent.classList.add('main-content-expanded');
+                sidebarDesktopToggle.innerHTML = '<i class="fas fa-chevron-left"></i>';
+                localStorage.setItem(SIDEBAR_STATE_KEY, 'open');
+            } else {
+                sidebar.classList.add('sidebar-desktop-closed');
+                mainContent.classList.add('main-content-collapsed');
+                mainContent.classList.remove('main-content-expanded');
+                sidebarDesktopToggle.innerHTML = '<i class="fas fa-chevron-right"></i>';
+                // Delay hiding visibility until transition is complete
+                 setTimeout(() => {
+                     if (sidebar.classList.contains('sidebar-desktop-closed')) {
+                        sidebar.style.visibility = 'hidden';
+                     }
+                 }, 350); // Match transition duration
+                localStorage.setItem(SIDEBAR_STATE_KEY, 'closed');
+            }
+        }
+    }
+
+    function toggleSidebar() {
+        if (isMobile()) {
+            const isOpen = !sidebar.classList.contains('sidebar-mobile-closed');
+            setSidebarState(!isOpen);
+        } else {
+            const isOpen = !sidebar.classList.contains('sidebar-desktop-closed');
+            setSidebarState(!isOpen);
+        }
+    }
+
+    function loadSidebarState() {
+         // Apply state based on screen size
+        if (!isMobile()) {
+            const savedState = localStorage.getItem(SIDEBAR_STATE_KEY);
+             // Default to open on desktop unless explicitly closed
+            setSidebarState(savedState !== 'closed');
+            // Clean up mobile classes potentially left over from resize
+            sidebar.classList.remove('sidebar-mobile-closed', 'sidebar-mobile-open');
+        } else {
+            // Ensure sidebar is closed on mobile initially and desktop classes are removed
+            setSidebarState(false);
+            sidebar.classList.remove('sidebar-desktop-closed');
+            sidebar.style.visibility = 'visible'; // Mobile sidebar is controlled by transform/opacity
+        }
+    }
+
+    /* ========= Dashboard Initialization & Updates ========= */
+    function updateDashboardAfterLogin() {
+        userRoleDisplay.textContent = userRole || 'Unknown';
+        if (isAdmin) show(addNoticeBtn); else hide(addNoticeBtn);
+
+        hide(loginPage);
+        show(dashboardPage); // Show the dashboard container
+
+        // Use fadeIn for a smoother transition of the content wrapper
+        fadeIn(contentSectionsWrapper, 300);
+
+        loadSidebarState(); // Set sidebar state based on preference/screen size
+        renderNotices(); // Load and display notices
+        updateStatsSummary(); // Calculate and display stats
+        displayWelcome(); // Show the initial welcome message in content area
+    }
+    function initializeApp() {
+        loadTheme(); // Apply light/dark theme
+        try {
+            userRole = localStorage.getItem(ROLE_KEY);
+            isAdmin = (userRole === 'Admin');
+            if (userRole) {
+                updateDashboardAfterLogin(); // If logged in state exists, show dashboard
+            } else {
+                show(loginPage); // Otherwise, show login page
+                hide(dashboardPage);
+            }
+        } catch (error) {
+            console.error("Error reading user role from localStorage:", error);
+            // Fallback to login page if storage is corrupt or inaccessible
+            show(loginPage);
+            hide(dashboardPage);
+        }
+    }
+
+    /* ========= Content Area & Syllabus Management ========= */
+    function displayWelcome() {
+        mainTitle.textContent = "ড্যাশবোর্ড"; // Set header title
+        contentArea.innerHTML = ''; // Clear previous content
+        // Make sure welcomeSection exists before trying to append it
+        if (welcomeSection) {
+             contentArea.appendChild(welcomeSection); // Add welcome message block
+             fadeIn(welcomeSection, 400); // Fade it in
+        }
+        clearActiveSubject(); // No subject selected initially
+    }
+    function clearActiveSubject() {
+        // Remove active styles from all subject links
+        subjectMenu.querySelectorAll('li.active').forEach(li => {
+            li.classList.remove('active');
+            // Also remove specific hover/active styles if they were applied via class
+            li.querySelector('a')?.classList.remove('bg-blue-800', 'dark:bg-gray-700');
+        });
+    }
+    function setActiveSubject(selectedLi) {
+        clearActiveSubject(); // Clear previous selection first
+        if(selectedLi) {
+            selectedLi.classList.add('active');
+             // Optionally add specific styles directly or rely on the .active class selector in CSS
+            // selectedLi.querySelector('a')?.classList.add('bg-blue-800', 'dark:bg-gray-700');
+        }
+    }
+    function getPlaylistData(baseKey) {
+        const storageKey = PLAYLIST_STORAGE_KEY_PREFIX + baseKey;
+        try {
+            const stored = localStorage.getItem(storageKey);
+            if (!stored) return { type: null, value: null, url: null }; // Return empty object if not found
+            const parsed = JSON.parse(stored);
+            // Validate parsed data structure
+            if (parsed && typeof parsed === 'object' && (parsed.value || parsed.url)) {
+                return {
+                    type: parsed.type || null, // Ensure type exists
+                    value: parsed.value || null, // Ensure value exists
+                    // Derive URL from value if missing, primarily for backward compatibility or simple storage
+                    url: parsed.url || (parsed.type === 'embed' ? parsed.value : (parsed.type === 'playlistId' ? `https://www.youtube.com/playlist?list=${parsed.value}` : null)),
+                };
+            }
+        } catch (e) { console.warn(`Could not parse playlist data for key ${baseKey}:`, e); }
+        return { type: null, value: null, url: null }; // Return empty object on error
+    }
+    function extractYoutubeIdOrEmbed(input) {
+         if (!input || typeof input !== 'string') return null;
+         input = input.trim();
+
+         // 1. Check for standard iframe embed code (more robustly checking for playlist URLs)
+         const iframeMatch = input.match(/<iframe[^>]+src=["'](https?:\/\/[^"']+)["']/i);
+         if (iframeMatch && iframeMatch[1]) {
+             const srcUrl = iframeMatch[1];
+             // Check if it's a playlist embed (videoseries or list=...)
+             if (srcUrl.includes('/embed/videoseries') || srcUrl.includes('list=')) {
+                 try {
+                     const url = new URL(srcUrl);
+                     const listId = url.searchParams.get('list');
+                     // Validate Playlist ID format
+                     if (listId && /^[a-zA-Z0-9_-]{13,34}$/.test(listId)) {
+                         // Return the clean ID and the original embed code (might contain custom params)
+                         return { type: 'playlistId', value: listId, embedCode: input };
+                     }
+                 } catch (e) { /* Invalid URL inside src? Ignore. */ }
+                 // If it looks like an embed but we couldn't parse a valid list ID, treat as generic embed
+                 return { type: 'embed', value: input };
+             }
+             // Could add checks here for single video embeds if needed
+         }
+
+         // 2. Check for YouTube Playlist URL
+         try {
+             const url = new URL(input);
+             if ((url.hostname.includes('youtube.com') || url.hostname.includes('youtu.be'))) {
+                 // Standard youtube.com playlist URL
+                 if (url.pathname === '/playlist' || url.pathname.includes('/playlist/')) {
+                     const listId = url.searchParams.get('list');
+                     if (listId && /^[a-zA-Z0-9_-]{13,34}$/.test(listId)) {
+                         return { type: 'playlistId', value: listId };
+                     }
+                 }
+                 // Shortened youtu.be URL (less common for playlists but possible)
+                 if (url.hostname === 'youtu.be' && url.searchParams.has('list')) {
+                     const listId = url.searchParams.get('list');
+                      if (listId && /^[a-zA-Z0-9_-]{13,34}$/.test(listId)) {
+                         return { type: 'playlistId', value: listId };
+                     }
+                 }
+             }
+         } catch (e) { /* Not a valid URL, continue checking */ }
+
+         // 3. Check if the input *is* just a Playlist ID
+         if (/^[a-zA-Z0-9_-]{13,34}$/.test(input)) {
+             return { type: 'playlistId', value: input };
+         }
+
+         // 4. Fallback: If it starts like an iframe, assume it's a custom/malformed embed
+         if (input.startsWith('<iframe') && input.endsWith('>')) {
+             return { type: 'embed', value: input };
+         }
+
+         // 5. If none of the above match, return null
+         return null;
+     }
+
+
+    function renderSyllabus(subject) {
+        const subjectData = syllabusData[subject];
+        if (!subjectData) {
+            contentArea.innerHTML = `<p class="text-red-500 dark:text-red-400 p-5">ত্রুটি: "${subject}" বিষয়ের সিলেবাস ডেটা খুঁজে পাওয়া যায়নি।</p>`;
+            return;
+        }
+        mainTitle.textContent = `${subject} সিলেবাস`; // Update header title
+        contentArea.innerHTML = ''; // Clear previous content
+        hide(welcomeSection); // Hide the welcome message
+        show(loadingIndicator); // Show loading spinner
+
+        // Simulate loading delay for better UX
+        setTimeout(() => {
+            hide(loadingIndicator); // Hide spinner after delay
+
+            let contentHTML = `<div class="section-header flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-3 border-b border-blue-100 dark:border-gray-700 mb-5">
+                                <h2 id="syllabus-section-title" class="flex gap-2 items-center text-indigo-700 dark:text-indigo-300 text-lg md:text-xl font-bangla font-semibold">
+                                    <i class="fas fa-stream mr-1"></i> ${subject} - অধ্যায়সমূহ
+                                </h2>
+                                <span class="text-xs text-gray-500 dark:text-gray-400">প্লে-লিস্ট স্ট্যাটাস <i class="fas fa-circle-play text-green-500 dark:text-green-400 animate-pulseGlow inline-block ml-1"></i> = যুক্ত আছে</span>
+                              </div>`;
+
+            // Iterate through papers (e.g., 'প্রথম পত্র', 'দ্বিতীয় পত্র')
+            Object.keys(subjectData).forEach((paper, paperIndex) => {
+                const chapters = subjectData[paper];
+                if (!Array.isArray(chapters)) return; // Skip if data is not an array
+
+                // Add animation delay for staggered effect
+                contentHTML += `<div class="mb-8 syllabus-section animate-fadeInUp" style="animation-delay: ${paperIndex * 100}ms;">
+                    <h3 class="text-lg mb-4 font-bold text-blue-800 dark:text-blue-300 font-bangla">${paper}</h3>
+                    <div class="overflow-x-auto shadow-lg rounded-lg border border-gray-200 dark:border-gray-700/50 relative">
+                        <table class="syllabus-table w-full bg-white dark:bg-gray-800/80 text-sm md:text-base table-auto">
+                            <thead class="bg-gray-100 dark:bg-gray-700/80 text-gray-600 dark:text-gray-300 font-semibold uppercase text-xs sticky top-0 z-10">
+                                <tr>
+                                    <th class="p-3 text-left tracking-wider">অধ্যায়</th>
+                                    <th class="p-3 text-center tracking-wider w-40 md:w-48">প্লে-লিস্ট / অ্যাকশন</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">`;
+
+                // Iterate through chapters within the paper
+                 chapters.forEach((chapter, chapterIndex) => {
+                    // Generate a unique key for storing playlist data for this chapter
+                    const basePlaylistKey = `${subject}_${paper}_${chapterIndex}`;
+                    const playlistData = getPlaylistData(basePlaylistKey);
+                    const hasPlaylist = playlistData && (playlistData.value || playlistData.url);
+                    const sanitizedChapter = sanitizeHTML(chapter); // Sanitize chapter name
+
+                    contentHTML += `<tr class="hover:bg-indigo-50 dark:hover:bg-gray-700/40 transition duration-150 ease-in-out group">
+                        <td class="py-3 px-4 font-bangla text-gray-800 dark:text-gray-200 align-middle group-hover:text-indigo-800 dark:group-hover:text-indigo-300 transition-colors">
+                            <span class="font-semibold text-gray-500 dark:text-gray-400 mr-1.5">${chapterIndex + 1}.</span> ${sanitizedChapter}
+                            ${hasPlaylist ? '<i class="fas fa-circle-play text-green-500 dark:text-green-400 ml-2 animate-pulseGlow inline-block" title="প্লে-লিস্ট যুক্ত আছে"></i>' : ''}
+                        </td>
+                        <td class="action-buttons py-3 px-4 text-center align-middle">
+                            <div class="flex flex-col sm:flex-row gap-2 justify-center items-center">`;
+
+                     // Action buttons based on playlist existence and user role
+                     if (hasPlaylist) {
+                        // View button if playlist exists
+                        contentHTML += `<button class="btn-view-playlist btn btn-xs sm:btn-sm bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md font-semibold flex items-center justify-center gap-1 transition shadow-md w-full sm:w-auto hover:shadow-lg transform hover:-translate-y-1" data-key="${basePlaylistKey}" data-chapter="${sanitizedChapter}" title="প্লে-লিস্ট দেখুন"><i class="fab fa-youtube"></i> <span class="hidden sm:inline">দেখুন</span></button>`;
+                    } else if (!isAdmin) {
+                        // Show N/A for students if no playlist
+                        contentHTML += `<span class="text-xs text-gray-400 dark:text-gray-500 italic">N/A</span>`;
+                    }
+
+                    // Admin gets Edit/Add button regardless
+                    if (isAdmin) {
+                         const buttonClass = hasPlaylist ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-blue-500 hover:bg-blue-600';
+                         const buttonIcon = hasPlaylist ? 'fa-edit' : 'fa-plus';
+                         const buttonText = hasPlaylist ? 'Edit' : 'Add';
+                         const buttonTitle = hasPlaylist ? 'লিংক সম্পাদনা' : 'লিংক যুক্ত করুন';
+                         contentHTML += `<button class="btn-edit-playlist btn btn-xs sm:btn-sm ${buttonClass} text-white px-3 py-1 rounded-md font-semibold flex items-center justify-center gap-1 transition shadow-md w-full sm:w-auto hover:shadow-lg transform hover:-translate-y-1" data-key="${basePlaylistKey}" data-chapter="${sanitizedChapter}" data-subject="${subject}" title="${buttonTitle}"><i class="fas ${buttonIcon}"></i> <span class="hidden sm:inline">${buttonText}</span></button>`;
+                     }
+
+                    contentHTML += `</div></td></tr>`;
+                });
+
+                contentHTML += `</tbody></table></div></div>`; // Close table, container, and section divs
+            });
+
+            contentArea.innerHTML = contentHTML; // Insert the generated HTML
+            addSyllabusButtonListeners(); // Attach event listeners to the new buttons
+        }, 150); // End setTimeout
+    }
+
+    /* ====== Modal Management ====== */
+    function openModal(title, contentHTML, type = 'default') {
+        modalTitleSlot.textContent = title;
+        modalBody.innerHTML = contentHTML; // Inject content
+
+        const modalContent = modalTemplate.querySelector('.modal-content');
+        // Reset width classes before applying new one
+        modalContent.classList.remove('max-w-xs', 'max-w-sm', 'max-w-md', 'max-w-lg', 'max-w-xl', 'max-w-2xl', 'max-w-3xl', 'max-w-4xl', 'max-w-5xl');
+
+        // Set appropriate max width based on modal type
+        if (type === 'playlistView') modalContent.classList.add('max-w-5xl'); // Wider for video player
+        else if (type === 'noticeEdit' || type === 'playlistEdit') modalContent.classList.add('max-w-lg'); // Medium for forms
+        else modalContent.classList.add('max-w-2xl'); // Default width
+
+        modalTemplate.classList.remove('hidden');
+        modalTemplate.classList.add('flex'); // Show the modal container
+        document.body.classList.add('overflow-hidden'); // Prevent body scroll
+        attachModalContentListeners(type); // Attach listeners specific to the modal content
+    }
+    function closeModal() {
+        // Use fadeOut for smooth closing animation
+        fadeOut(modalTemplate, 250, () => {
+            modalTemplate.classList.remove('flex'); // Remove flex display after fade
+            modalBody.innerHTML = ''; // Clear injected content
+            modalTitleSlot.textContent = 'Modal Title'; // Reset title
+             // Clean up YouTube player if it exists
+             const playerContainer = document.getElementById('youtube-player-container');
+             if(playerContainer) playerContainer.innerHTML = ''; // Clear player to stop video etc.
+             const fullscreenOverlay = document.getElementById('youtube-fullscreen-overlay');
+             if (fullscreenOverlay && !fullscreenOverlay.classList.contains('hidden')) {
+                 hide(fullscreenOverlay);
+                 document.getElementById('youtube-fullscreen-container').innerHTML = '';
+             }
+        });
+        document.body.classList.remove('overflow-hidden'); // Re-enable body scroll
+    }
+    function attachModalContentListeners(type) {
+        // Attach listeners based on the content loaded into the modal
+        if (type === 'playlistEdit') {
+            const saveBtn = modalBody.querySelector('#save-playlist-btn');
+            const removeBtn = modalBody.querySelector('#remove-playlist-btn');
+            saveBtn?.addEventListener('click', savePlaylist);
+            removeBtn?.addEventListener('click', removePlaylist);
+
+            // Show/hide remove button based on whether data exists
+            const urlInput = modalBody.querySelector('#playlist-url');
+             const keyInput = modalBody.querySelector('#edit-key-playlist');
+             if (keyInput && urlInput) {
+                const playlistData = getPlaylistData(keyInput.value);
+                 // Show remove button only if there's existing data (URL or value)
+                 if (playlistData && (playlistData.value || playlistData.url)) {
+                     show(removeBtn);
+                 } else {
+                     hide(removeBtn);
+                 }
+             } else {
+                 hide(removeBtn); // Hide if inputs are missing
+             }
+        } else if (type === 'noticeEdit') {
+            const saveBtn = modalBody.querySelector('#save-notice-btn');
+            saveBtn?.addEventListener('click', saveNotice);
+        }
+        // Add more listener setups for other modal types if needed
+    }
+
+    /* ====== YouTube Player Enhancements ====== */
+    function setupYouTubePlayer(basePlaylistKey, chapterTitle) {
+        const playlistData = getPlaylistData(basePlaylistKey);
+         // Check if valid data (value or URL) exists
+        if (!playlistData || (!playlistData.value && !playlistData.url && playlistData.type !== 'embed')) {
+             const playerContainer = document.getElementById('youtube-player-container');
+             if (playerContainer) {
+                 playerContainer.innerHTML = `<div class="p-4 bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300 rounded text-center">ত্রুটি: এই অধ্যায়ের জন্য কোনো প্লে-লিস্ট পাওয়া যায়নি।</div>`;
+             }
+             console.error("Playlist data missing for key:", basePlaylistKey);
+            // Optionally show an alert or keep the message in the container
+            // alert("ত্রুটি: প্লে-লিস্ট ডেটা পাওয়া যায়নি।");
+            return;
+        }
+
+        const playerContainer = document.getElementById('youtube-player-container');
+        if (!playerContainer) return;
+
+        let embedCode = '';
+        // Generate a unique ID for the iframe to target it specifically
+        const uniqueIframeId = `youtube-iframe-${Date.now()}`;
+
+        // Case 1: Stored data is an embed code
+        if (playlistData.type === 'embed' && playlistData.value) {
+            let embedValue = playlistData.value;
+            // Remove existing width/height attributes for responsiveness
+            embedValue = embedValue.replace(/width=["']?\d+[%px]?["']?/gi, '');
+            embedValue = embedValue.replace(/height=["']?\d+[%px]?["']?/i, '');
+            // Ensure allowfullscreen is present
+            if (!embedValue.includes('allowfullscreen')) {
+                 // Insert allowfullscreen attribute carefully
+                embedValue = embedValue.replace(/<iframe/i, '<iframe allowfullscreen');
+            }
+            // Add unique ID and lazy loading
+            embedValue = embedValue.replace(/<iframe/i, `<iframe id="${uniqueIframeId}" loading="lazy"`);
+            embedCode = embedValue;
+        }
+        // Case 2: Stored data is a playlist ID
+        else if (playlistData.type === 'playlistId' && playlistData.value) {
+            embedCode = `<iframe id="${uniqueIframeId}" loading="lazy" width="100%" height="100%" src="https://www.youtube.com/embed/videoseries?list=${playlistData.value}&autoplay=0&rel=0" title="YouTube playlist player for ${chapterTitle}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+        }
+        // Case 3: Stored data might be a direct embed URL (less common, but handle)
+        else if (playlistData.url && playlistData.url.includes('youtube.com/embed')) {
+             // Ensure allowfullscreen and other necessary attributes
+            embedCode = `<iframe id="${uniqueIframeId}" loading="lazy" width="100%" height="100%" src="${playlistData.url}" title="YouTube video player for ${chapterTitle}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+        }
+        // Fallback: If data exists but type is unrecognized or value is missing
+        else {
+            embedCode = `<div class="p-4 bg-yellow-100 dark:bg-yellow-900/50 text-yellow-700 dark:text-yellow-300 rounded text-center">প্লে-লিস্ট লোড করা যাচ্ছে না। সংরক্ষিত ডেটা সঠিক নয়।</div>`;
+             console.warn("Could not determine embed type for:", playlistData);
+        }
+
+        // Inject the embed code into the container
+        // Ensure aspect ratio container exists if needed
+         if (embedCode.startsWith('<iframe')) {
+            playerContainer.innerHTML = `<div class="aspect-ratio-container">${embedCode}</div>`;
+         } else {
+            playerContainer.innerHTML = embedCode; // For error messages
+         }
+
+        // Add compatibility attributes for fullscreen on different browsers
+        const iframe = document.getElementById(uniqueIframeId);
+        if (iframe) {
+            iframe.setAttribute('webkitallowfullscreen', 'true');
+            iframe.setAttribute('mozallowfullscreen', 'true');
+        }
+
+        // Setup fullscreen controls if an iframe was successfully embedded
+        const fullscreenControls = playerContainer.querySelector('.fullscreen-controls');
+        if (iframe && fullscreenControls) {
+             show(fullscreenControls); // Show the control buttons container
+
+             const enterFullscreenBtn = fullscreenControls.querySelector('#enter-fullscreen');
+             const exitFullscreenBtn = fullscreenControls.querySelector('#exit-fullscreen');
+
+             // --- Fullscreen Button Logic ---
+             // Store reference to the original iframe HTML for restoring later
+            const originalIframeHTML = iframe.outerHTML;
+
+            enterFullscreenBtn.onclick = () => {
+                 if (!document.fullscreenElement) { // Check if not already fullscreen
+                     show(youtubeFullscreenOverlay);
+                     // Move the *existing* iframe or recreate it inside the fullscreen container
+                     // Recreating ensures clean state and might handle some edge cases better
+                     youtubeFullscreenContainer.innerHTML = `<div class="w-full h-full">${originalIframeHTML}</div>`;
+
+                     // Make sure the new iframe also has the necessary attributes
+                     const fullscreenIframe = youtubeFullscreenContainer.querySelector('iframe');
+                      if (fullscreenIframe) {
+                          fullscreenIframe.setAttribute('webkitallowfullscreen', 'true');
+                          fullscreenIframe.setAttribute('mozallowfullscreen', 'true');
+                          // Try to request fullscreen via API if available (optional, browser handles iframe fullscreen)
+                          // fullscreenIframe.requestFullscreen().catch(err => console.log(err));
+                      }
+
+                     show(exitFullscreenBtn);
+                     hide(enterFullscreenBtn);
+                     document.body.classList.add('overflow-hidden'); // Prevent background scroll
+                 }
+             };
+
+            exitFullscreenBtn.onclick = () => {
+                 hide(youtubeFullscreenOverlay);
+                 youtubeFullscreenContainer.innerHTML = ''; // Clear fullscreen container
+                 // The original iframe remains in the modal, no need to restore it here if we didn't move it
+                 // If we *moved* it, we'd need to put it back. Recreating from originalHTML is safer.
+                  if (playerContainer) {
+                     if (embedCode.startsWith('<iframe')) {
+                        playerContainer.innerHTML = `<div class="aspect-ratio-container">${originalIframeHTML}</div>`;
+                     } else {
+                        playerContainer.innerHTML = embedCode; // Restore error message if applicable
+                     }
+                    // Re-attach fullscreen controls to the container *inside the modal*
+                     const controlsHTML = `<div class="fullscreen-controls">
+                                            <button class="fullscreen-btn" id="enter-fullscreen" title="ফুলস্ক্রিন"><i class="fas fa-expand"></i></button>
+                                            <button class="fullscreen-btn" id="exit-fullscreen" title="ফুলস্ক্রিন বন্ধ" style="display: none;"><i class="fas fa-compress"></i></button>
+                                          </div>`;
+                     playerContainer.insertAdjacentHTML('beforeend', controlsHTML);
+                     // Re-bind listeners to the *new* buttons inside the modal
+                    setupYouTubePlayer(basePlaylistKey, chapterTitle); // Recursive call might be too much, better to just re-bind the click handlers
+                    const newEnterBtn = playerContainer.querySelector('#enter-fullscreen');
+                    const newExitBtn = playerContainer.querySelector('#exit-fullscreen');
+                    if(newEnterBtn) newEnterBtn.onclick = enterFullscreenBtn.onclick; // Re-use the handler logic
+                    if(newExitBtn) newExitBtn.onclick = exitFullscreenBtn.onclick; // Re-use the handler logic
+                    show(newEnterBtn); // Ensure enter button is visible by default after exit
+                 }
+
+                 hide(exitFullscreenBtn);
+                 show(enterFullscreenBtn); // This might refer to the old button, ensure we target the right one.
+                 document.body.classList.remove('overflow-hidden');
+            };
+        } else if (fullscreenControls) {
+            hide(fullscreenControls); // Hide controls if no iframe was loaded
+        }
+    }
+
+
+
+    /* ====== Syllabus Actions & Playlist Handling ====== */
+    function addSyllabusButtonListeners() {
+        // View Playlist Button Listener
+        contentArea.querySelectorAll('.btn-view-playlist').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent any default behavior
+                const basePlaylistKey = btn.getAttribute('data-key');
+                const chapterTitle = btn.getAttribute('data-chapter');
+                if (!basePlaylistKey || !chapterTitle) {
+                     console.error("Missing data attributes on view button.");
+                     return;
+                }
+                openModal(`প্লে-লিস্ট: ${chapterTitle}`, playlistModalContent, 'playlistView');
+                 // Delay setup slightly to ensure modal is rendered
+                setTimeout(() => {
+                    setupYouTubePlayer(basePlaylistKey, chapterTitle);
+                }, 100);
+            });
+        });
+
+        // Edit/Add Playlist Button Listener (Admin Only)
+        if (isAdmin) {
+            contentArea.querySelectorAll('.btn-edit-playlist').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault(); // Prevent any default behavior
+                    const basePlaylistKey = btn.getAttribute('data-key');
+                    const chapterTitle = btn.getAttribute('data-chapter');
+                    const subject = btn.getAttribute('data-subject');
+                     if (!basePlaylistKey || !chapterTitle || !subject) {
+                         console.error("Missing data attributes on edit button.");
+                         return;
+                    }
+                    openAdminPlaylistModal(basePlaylistKey, chapterTitle, subject);
+                });
+            });
+        }
+    }
+
+    function openAdminPlaylistModal(basePlaylistKey, chapterTitle, subject) {
+        // Use the modal function with the admin playlist content template
+        openModal('প্লে-লিস্ট যুক্ত/সম্পাদনা', adminPlaylistModalContent, 'playlistEdit');
+
+        // Populate the modal fields after it's opened
+        // Use setTimeout to ensure elements are in the DOM
+        setTimeout(() => {
+            const chapterNameEl = document.getElementById('admin-modal-chapter-name');
+            const editKeyInput = document.getElementById('edit-key-playlist');
+            const editSubjectInput = document.getElementById('edit-subject-playlist');
+            const urlInput = document.getElementById('playlist-url');
+            const messageEl = document.getElementById('admin-playlist-message');
+            const removeBtn = document.getElementById('remove-playlist-btn'); // Get remove button reference
+
+             // Ensure all elements exist
+            if (!chapterNameEl || !editKeyInput || !editSubjectInput || !urlInput || !messageEl || !removeBtn) {
+                 console.error("Admin playlist modal elements not found!");
+                 closeModal(); // Close modal if elements are missing
+                 return;
+            }
+
+            // Populate fields
+            chapterNameEl.textContent = chapterTitle;
+            editKeyInput.value = basePlaylistKey;
+            editSubjectInput.value = subject;
+            hide(messageEl); // Hide any previous messages
+
+            // Get existing data and populate the URL field
+            const playlistData = getPlaylistData(basePlaylistKey);
+             // Populate with the original input URL/Embed or derived URL if only ID was stored
+             urlInput.value = playlistData.url || (playlistData.type === 'playlistId' ? `https://www.youtube.com/playlist?list=${playlistData.value}` : (playlistData.value || ''));
+
+            // Show/hide remove button based on data existence
+             if (playlistData && (playlistData.value || playlistData.url)) {
+                 show(removeBtn);
+             } else {
+                 hide(removeBtn);
+             }
+        }, 0); // Small delay is usually enough
+    }
+
+    function savePlaylist() {
+        // Get references to modal elements
+        const baseKey = document.getElementById('edit-key-playlist')?.value;
+        const subject = document.getElementById('edit-subject-playlist')?.value;
+        const chapterName = document.getElementById('admin-modal-chapter-name')?.textContent;
+        const userInput = document.getElementById('playlist-url')?.value.trim();
+        const messageEl = document.getElementById('admin-playlist-message');
+        const removeBtn = document.getElementById('remove-playlist-btn'); // To show/hide it after save/remove
+
+        if (!baseKey || !subject || !chapterName || !userInput || !messageEl || !removeBtn) {
+            showTemporaryMessage(messageEl, 'ফর্মের ডেটা সঠিকভাবে পাওয়া যায়নি।', false);
+            return;
+        }
+
+        hide(messageEl); // Clear previous messages
+        const wasExisting = !!getPlaylistData(baseKey).url || !!getPlaylistData(baseKey).value; // Check if data existed before
+
+        if (!userInput) {
+            showTemporaryMessage(messageEl, 'দয়া করে ইউটিউব প্লে-লিস্ট URL বা Embed কোড দিন।', false);
+            return;
+        }
+
+        // Attempt to parse the input
+        const parsed = extractYoutubeIdOrEmbed(userInput);
+        if (!parsed || (!parsed.value && parsed.type !== 'embed')) { // Allow embed type even without value if parser returns it
+             showTemporaryMessage(messageEl, "অবৈধ ইউটিউব URL, Embed কোড বা প্লে-লিস্ট আইডি।", false);
+             return;
+         }
+
+        // Prepare data for storage
+        // Store the original input as 'url' for easy retrieval in the edit modal.
+        // Store the extracted 'type' and 'value' (ID or full embed code).
+        const dataToStore = JSON.stringify({
+            type: parsed.type,
+            value: parsed.type === 'playlistId' ? parsed.value : parsed.embedCode || userInput, // Store clean ID or full embed code
+            url: userInput // Always store the original input for the text area
+        });
+        const storageKey = PLAYLIST_STORAGE_KEY_PREFIX + baseKey;
+
+        try {
+            localStorage.setItem(storageKey, dataToStore);
+            showTemporaryMessage(messageEl, "প্লে-লিস্ট লিংক সফলভাবে সংরক্ষিত হয়েছে!", true);
+            show(removeBtn); // Ensure remove button is visible after saving
+
+            // Add an automatic notice about the change
+            const actionText = wasExisting ? 'আপডেট' : 'যুক্ত';
+            const noticeTitle = `প্লে-লিস্ট ${actionText}: ${subject}`;
+            const noticeContent = `"${chapterName}" (${subject}) অধ্যায়ের প্লে-লিস্ট ${actionText} করা হয়েছে।`;
+            addAutomaticNotice(noticeTitle, noticeContent);
+
+            // Close modal and refresh view after a short delay
+            setTimeout(() => {
+                refreshCurrentSyllabusView(); // Update the syllabus table view
+                updateStatsSummary(); // Update the stats count
+                closeModal();
+            }, 1200);
+        } catch (e) {
+            console.error("Error saving playlist to localStorage:", e);
+            // Provide more specific feedback if possible (e.g., storage quota exceeded)
+            showTemporaryMessage(messageEl, `লিংক সংরক্ষণ করতে সমস্যা হয়েছে: ${e.message}`, false);
+        }
+    }
+
+    function removePlaylist() {
+        const baseKey = document.getElementById('edit-key-playlist')?.value;
+        const messageEl = document.getElementById('admin-playlist-message');
+        const removeBtn = document.getElementById('remove-playlist-btn');
+        const urlInput = document.getElementById('playlist-url');
+        const subject = document.getElementById('edit-subject-playlist')?.value;
+        const chapterName = document.getElementById('admin-modal-chapter-name')?.textContent;
+
+
+        if (!baseKey || !messageEl || !removeBtn || !urlInput || !subject || !chapterName) {
+             console.error("Missing elements for playlist removal.");
+             return;
+        }
+
+        // Confirmation dialog
+        if (!confirm('আপনি কি নিশ্চিতভাবে এই প্লে-লিস্ট লিংকটি মুছে ফেলতে চান?')) {
+            return; // Abort if user cancels
+        }
+
+        const storageKey = PLAYLIST_STORAGE_KEY_PREFIX + baseKey;
+        try {
+            localStorage.removeItem(storageKey); // Remove from storage
+            urlInput.value = ''; // Clear the input field
+            hide(removeBtn); // Hide the remove button itself
+            showTemporaryMessage(messageEl, "প্লে-লিস্ট লিংক সফলভাবে মুছে ফেলা হয়েছে!", true);
+
+            // Add automatic notice for removal
+            const noticeTitle = `প্লে-লিস্ট মুছে ফেলা হয়েছে: ${subject}`;
+            const noticeContent = `"${chapterName}" (${subject}) অধ্যায়ের প্লে-লিস্ট লিংক মুছে ফেলা হয়েছে।`;
+            addAutomaticNotice(noticeTitle, noticeContent);
+
+
+            // Close modal and refresh after delay
+            setTimeout(() => {
+                refreshCurrentSyllabusView(); // Update syllabus table
+                updateStatsSummary(); // Update stats
+                closeModal();
+            }, 1200);
+        } catch (e) {
+            console.error("Error removing playlist from localStorage:", e);
+            showTemporaryMessage(messageEl, `লিংক মুছতে সমস্যা হয়েছে: ${e.message}`, false);
+        }
+    }
+
+    function refreshCurrentSyllabusView() {
+        // Find the currently active subject link in the sidebar
+        const activeSubjectLink = subjectMenu.querySelector('li.active a[data-subject]');
+        if (activeSubjectLink) {
+            const subject = activeSubjectLink.getAttribute('data-subject');
+            if (subject) {
+                renderSyllabus(subject); // Re-render the syllabus for that subject
+            }
+        } else {
+            // If no subject is active (e.g., on initial load or after error), maybe display welcome?
+             // displayWelcome(); // Or do nothing if a refresh isn't strictly needed without context
+        }
+    }
+
+    /* ========== Notice Board & Auto Notice ========== */
+    function loadNotices() {
+        notices.length = 0; // Clear the current array
+        try {
+            const stored = localStorage.getItem(NOTICE_STORAGE_KEY);
+            if (stored) {
+                const parsedNotices = JSON.parse(stored);
+                // Sort by timestamp descending (newest first)
+                parsedNotices.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+                notices.push(...parsedNotices); // Add loaded notices to the array
+            }
+        } catch (e) {
+            console.error("Error loading notices from localStorage:", e);
+            localStorage.removeItem(NOTICE_STORAGE_KEY); // Clear potentially corrupt data
+        }
+    }
+
+    function renderNotices() {
+        loadNotices(); // Ensure the 'notices' array is up-to-date
+        noticeBoard.innerHTML = ''; // Clear the display area
+
+        if (notices.length === 0) {
+            show(noNoticesMsg); // Show 'no notices' message
+            return;
+        }
+
+        hide(noNoticesMsg); // Hide 'no notices' message
+
+        notices.forEach((notice, index) => {
+            const noticeEl = document.createElement('div');
+            // Determine styling based on whether it's an automatic update notice
+            const isUpdateNotice = notice.id.startsWith('update-');
+            const bgColor = isUpdateNotice ? 'bg-blue-50 dark:bg-gray-800/70' : 'bg-yellow-50 dark:bg-gray-800';
+            const borderColor = isUpdateNotice ? 'border-blue-400 dark:border-blue-500' : 'border-yellow-400 dark:border-yellow-500';
+            const titleColor = isUpdateNotice ? 'text-blue-800 dark:text-blue-300' : 'text-yellow-800 dark:text-yellow-300';
+            const icon = isUpdateNotice ? 'fas fa-sync-alt text-blue-500' : 'fas fa-bullhorn text-yellow-500 dark:text-yellow-400';
+
+            noticeEl.className = `notice-item ${bgColor} border-l-4 ${borderColor} rounded-r-lg p-4 shadow-sm animate-fadeInUp`;
+            noticeEl.style.animationDelay = `${index * 40}ms`; // Staggered animation
+            noticeEl.setAttribute('data-id', notice.id);
+
+            // Format timestamp
+            const dateObj = new Date(notice.timestamp || Date.now());
+            const formattedDate = dateObj.toLocaleDateString('bn-BD', {
+                day: '2-digit', month: 'short', year: 'numeric',
+                hour: '2-digit', minute: '2-digit', hour12: true // Use Bengali locale and 12-hour format
+            });
+
+            // Sanitize content before inserting
+             const safeTitle = sanitizeHTML(notice.title);
+             const safeContent = sanitizeHTML(notice.content).replace(/\n/g, '<br>'); // Allow line breaks
+             const safeLink = notice.link ? sanitizeHTML(notice.link) : null;
+
+            noticeEl.innerHTML = `
+                <div class="flex flex-col sm:flex-row justify-between items-start gap-2 mb-2">
+                    <h4 class="text-base font-bold ${titleColor} flex-1 flex items-center gap-2">
+                        <i class="${icon}"></i><span>${safeTitle}</span>
+                    </h4>
+                    ${(isAdmin && !isUpdateNotice) ? `
+                    <div class="notice-actions flex gap-2 flex-shrink-0 mt-2 sm:mt-0">
+                        <button class="btn-edit-notice btn btn-xs bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded hover:shadow-lg transform hover:-translate-y-1" title="সম্পাদনা করুন">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn-delete-notice btn btn-xs bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded hover:shadow-lg transform hover:-translate-y-1" title="মুছে ফেলুন">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>` : ''}
+                </div>
+                <div class="text-gray-700 dark:text-gray-300 text-sm mb-2 prose dark:prose-invert max-w-none">
+                    ${safeContent}
+                </div>
+                ${safeLink ? `
+                <div class="notice-link mt-3">
+                    <a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-sm text-teal-600 dark:text-teal-400 hover:text-indigo-700 dark:hover:text-indigo-300 underline transition">
+                        <i class="fas fa-link"></i> লিংক দেখুন <i class="fas fa-external-link-alt text-xs opacity-80 ml-1"></i>
+                    </a>
+                </div>` : ''}
+                <div class="text-xs text-gray-500 dark:text-gray-400 text-right mt-3 pt-2 border-t border-gray-200 dark:border-gray-600/50">
+                    প্রকাশিত: ${formattedDate}
+                </div>`;
+
+            // Add event listeners for edit/delete buttons (only for admin on manual notices)
+            if (isAdmin && !isUpdateNotice) {
+                noticeEl.querySelector('.btn-edit-notice')?.addEventListener('click', () => openAdminNoticeModal(notice.id));
+                noticeEl.querySelector('.btn-delete-notice')?.addEventListener('click', () => deleteNotice(notice.id));
+            }
+
+            noticeBoard.appendChild(noticeEl); // Add the notice element to the board
+        });
+    }
+
+    function saveNoticesToStorage() {
+        try {
+            // Ensure notices are sorted before saving (optional, but good practice)
+            notices.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+            localStorage.setItem(NOTICE_STORAGE_KEY, JSON.stringify(notices));
+        } catch (e) {
+            console.error("Error saving notices to localStorage:", e);
+             // Handle potential errors like quota exceeded
+             alert("নোটিশ সংরক্ষণ করতে সমস্যা হয়েছে।");
+        }
+    }
+
+    function addAutomaticNotice(title, content) {
+        if (!isAdmin) return; // Only admins trigger actions that create auto-notices
+
+        const newNotice = {
+            // Generate a unique ID prefixed with 'update-'
+            id: `update-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`,
+            title: title,
+            content: content,
+            link: null, // Automatic notices typically don't have links
+            timestamp: Date.now()
+        };
+
+        notices.unshift(newNotice); // Add to the beginning of the array
+        saveNoticesToStorage(); // Save the updated list
+        renderNotices(); // Re-render the notice board to show the new notice immediately
+    }
+
+    function openAdminNoticeModal(noticeId = null) {
+        const isEditing = noticeId !== null;
+        const modalTitle = isEditing ? 'নোটিশ সম্পাদনা করুন' : 'নতুন নোটিশ যোগ করুন';
+        openModal(modalTitle, adminNoticeModalContent, 'noticeEdit');
+
+        // Use setTimeout to ensure elements are ready after modal opens
+         setTimeout(() => {
+            const form = document.getElementById('notice-form');
+            const titleInput = document.getElementById('notice-title');
+            const contentInput = document.getElementById('notice-content');
+            const linkInput = document.getElementById('notice-link');
+            const editIdInput = document.getElementById('edit-notice-id');
+            const messageEl = document.getElementById('admin-notice-message');
+
+            if (!form || !titleInput || !contentInput || !linkInput || !editIdInput || !messageEl) {
+                 console.error("Admin notice modal elements not found!");
+                 closeModal();
+                 return;
+            }
+
+            form.reset(); // Clear form fields
+            hide(messageEl); // Hide any previous messages
+            editIdInput.value = ''; // Clear hidden ID field
+
+            if (isEditing) {
+                const notice = notices.find(n => n.id === noticeId);
+                 // Check if notice exists and is not an automatic one
+                if (!notice || notice.id.startsWith('update-')) {
+                    console.warn(`Attempted to edit non-editable notice (ID: ${noticeId})`);
+                    showTemporaryMessage(messageEl, "এই নোটিশটি সম্পাদনা করা যাবে না।", false);
+                    setTimeout(closeModal, 1500);
+                    return;
+                }
+
+                // Populate form with existing notice data
+                editIdInput.value = notice.id;
+                titleInput.value = notice.title || '';
+                contentInput.value = notice.content || '';
+                linkInput.value = notice.link || '';
+            }
+        }, 0);
+    }
+
+    function saveNotice() {
+        const id = document.getElementById('edit-notice-id')?.value;
+        const title = document.getElementById('notice-title')?.value.trim();
+        const content = document.getElementById('notice-content')?.value.trim();
+        const link = document.getElementById('notice-link')?.value.trim();
+        const messageEl = document.getElementById('admin-notice-message');
+        const isEditing = id !== '';
+
+        if (!messageEl) return; // Should not happen if modal opened correctly
+        hide(messageEl); // Clear previous messages
+
+        // Validation
+        if (!title || !content) {
+            showTemporaryMessage(messageEl, "শিরোনাম এবং বিবরণ অবশ্যই পূরণ করতে হবে।", false);
+            return;
+        }
+        // Basic URL validation (optional but recommended)
+        if (link && !/^https?:\/\/.+/i.test(link)) {
+             try {
+                 new URL(link); // Stricter validation
+             } catch (_) {
+                 showTemporaryMessage(messageEl, "প্রদত্ত লিংকটি একটি বৈধ URL নয়।", false);
+                 return;
+             }
+        }
+
+        const noticeData = {
+            title,
+            content,
+            link: link || null, // Store null if link is empty
+            timestamp: Date.now() // Update timestamp on save/edit
+        };
+
+        if (isEditing) {
+            // Find the index of the notice being edited
+            const index = notices.findIndex(n => n.id === id);
+            // Ensure it exists and is not an automatic notice
+            if (index > -1 && !notices[index].id.startsWith('update-')) {
+                // Update the existing notice object, preserving the original ID
+                notices[index] = { ...notices[index], ...noticeData };
+            } else {
+                showTemporaryMessage(messageEl, "ত্রুটি: সম্পাদনার জন্য নোটিশ খুঁজে পাওয়া যায়নি বা এটি সম্পাদনাযোগ্য নয়!", false);
+                return; // Abort if notice not found or not editable
+            }
+        } else {
+            // Create a new notice object with a unique ID
+            noticeData.id = `notice-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
+            notices.unshift(noticeData); // Add the new notice to the beginning
+        }
+
+        saveNoticesToStorage(); // Save the updated notices array
+        renderNotices(); // Refresh the notice board display
+        showTemporaryMessage(messageEl, `নোটিশ সফলভাবে ${isEditing ? 'আপডেট' : 'সংরক্ষিত'} হয়েছে!`, true);
+
+        // Close the modal after a short delay
+        setTimeout(closeModal, 1500);
+    }
+
+    function deleteNotice(noticeId) {
+        const notice = notices.find(n => n.id === noticeId);
+        // Prevent deletion of automatic notices
+        if (!notice || notice.id.startsWith('update-')) {
+            alert("স্বয়ংক্রিয়ভাবে তৈরি হওয়া নোটিশ মুছে ফেলা যাবে না।");
+            return;
+        }
+
+        // Confirmation dialog
+        if (confirm('আপনি কি নিশ্চিতভাবে এই নোটিশটি মুছে ফেলতে চান? এই কাজটি আনডু করা যাবে না।')) {
+            const index = notices.findIndex(n => n.id === noticeId);
+            if (index > -1) {
+                notices.splice(index, 1); // Remove the notice from the array
+                saveNoticesToStorage(); // Save the changes
+                renderNotices(); // Refresh the display
+                 // Optional: Show a success message (e.g., using a toast notification system if available)
+                 // showToast("নোটিশ সফলভাবে মুছে ফেলা হয়েছে।");
+            } else {
+                // This should ideally not happen if the button corresponds to a rendered notice
+                alert('ত্রুটি: নোটিশ খুঁজে পাওয়া যায়নি। পৃষ্ঠাটি রিফ্রেশ করার চেষ্টা করুন।');
+            }
+        }
+    }
+
+    /* ========== Statistics Summary ========== */
+    function updateStatsSummary() {
+        if (!statsSummaryContent) return;
+        // Show loading state immediately
+        statsSummaryContent.innerHTML = '<i class="fas fa-spinner fa-spin mr-2 text-xl"></i> পরিসংখ্যান গণনা করা হচ্ছে...';
+
+        // Calculate stats asynchronously to avoid blocking UI thread
+        setTimeout(() => {
+            let linkedPlaylistsCount = 0;
+            try {
+                 // Iterate through all localStorage keys
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                     // Check if the key matches the playlist prefix
+                    if (key && key.startsWith(PLAYLIST_STORAGE_KEY_PREFIX)) {
+                         // Get the data, no need for baseKey here
+                         const storedData = localStorage.getItem(key);
+                         if (storedData) {
+                             try {
+                                 const parsedData = JSON.parse(storedData);
+                                 // Count if it has a valid value or URL indicating a link exists
+                                 if (parsedData && (parsedData.value || parsedData.url)) {
+                                     linkedPlaylistsCount++;
+                                 }
+                             } catch (parseError) {
+                                 console.warn(`Skipping invalid JSON in localStorage for key ${key}:`, parseError);
+                             }
+                         }
+                    }
+                }
+
+                // Update the UI with the calculated count
+                // Use Bengali locale for number formatting
+                const formattedCount = linkedPlaylistsCount.toLocaleString('bn-BD');
+                statsSummaryContent.innerHTML = `
+                    <i class="fas fa-link text-xl text-indigo-500 dark:text-indigo-400"></i>
+                    <span class="text-lg">মোট</span>
+                    <span class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">${formattedCount}</span>
+                    <span class="ml-1 text-lg text-gray-700 dark:text-gray-300">টি অধ্যায়ের প্লে-লিস্ট যুক্ত করা হয়েছে।</span>
+                `;
+            } catch (e) {
+                // Handle potential errors during localStorage access or calculation
+                console.error("Error calculating statistics:", e);
+                statsSummaryContent.innerHTML = '<span class="text-red-500 dark:text-red-400">পরিসংখ্যান লোড করতে সমস্যা হয়েছে।</span>';
+            }
+        }, 50); // Short delay is usually sufficient
+    }
+
+
+    /* ========= Event Listeners Setup ========= */
+    function setupEventListeners() {
+        // Login Form Submission
+        loginForm?.addEventListener('submit', handleLogin);
+
+        // Toggle Password Visibility
+        togglePassword?.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            // Update icon based on type
+            togglePassword.innerHTML = type === 'password' ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+        });
+
+        // Logout Button
+        logoutBtn?.addEventListener('click', handleLogout);
+
+        // Theme Toggle Button
+        themeToggleBtn?.addEventListener('click', toggleTheme);
+
+        // Sidebar Controls
+        sidebarMobileToggle?.addEventListener('click', () => setSidebarState(true));
+        sidebarMobileClose?.addEventListener('click', () => setSidebarState(false));
+        sidebarDesktopToggle?.addEventListener('click', toggleSidebar);
+        sidebarOverlay?.addEventListener('click', () => setSidebarState(false)); // Close mobile sidebar on overlay click
+
+        // Subject Menu Navigation (Event Delegation)
+        subjectMenu?.addEventListener('click', function (e) {
+            // Find the closest anchor tag with data-subject attribute
+            const link = e.target.closest('a[data-subject]');
+            // Ensure the click was on a link within the subject menu
+            if (link && subjectMenu.contains(link)) {
+                e.preventDefault(); // Prevent default link behavior
+                const subject = link.getAttribute('data-subject');
+                const listItem = link.parentElement; // Get the parent <li>
+
+                if (subject && listItem) {
+                    setActiveSubject(listItem); // Highlight the selected item
+                    renderSyllabus(subject); // Load content for the selected subject
+                    // Close mobile sidebar after selection
+                    if (isMobile()) {
+                        setSidebarState(false);
+                    }
+                } else {
+                    console.error("Subject or list item not found for clicked link.");
+                }
+            }
+        });
+
+        // Admin "Add Notice" Button
+        addNoticeBtn?.addEventListener('click', () => openAdminNoticeModal(null)); // Open modal for adding new notice
+
+        // Modal Global Close Button
+        modalCloseBtn?.addEventListener('click', closeModal);
+        // Close modal on backdrop click (click outside modal content)
+        modalTemplate?.addEventListener('click', (e) => {
+            if (e.target === modalTemplate) {
+                closeModal();
+            }
+        });
+
+        // Global ESC key listener to close modal
+        window.addEventListener('keydown', (e) => {
+            // Check if Escape key was pressed and modal is visible
+            if (e.key === 'Escape' && modalTemplate && !modalTemplate.classList.contains('hidden')) {
+                closeModal();
+            }
+             // Check if ESC key was pressed and fullscreen overlay is visible
+            if (e.key === 'Escape' && youtubeFullscreenOverlay && !youtubeFullscreenOverlay.classList.contains('hidden')) {
+                const exitBtn = document.querySelector('#exit-fullscreen');
+                 if (exitBtn) {
+                    exitBtn.click(); // Simulate clicking the exit button
+                 } else {
+                    // Fallback if button isn't found (shouldn't happen)
+                    hide(youtubeFullscreenOverlay);
+                    youtubeFullscreenContainer.innerHTML = '';
+                    document.body.classList.remove('overflow-hidden');
+                 }
+            }
+        });
+
+        // Debounced Resize listener for responsive adjustments (e.g., sidebar state)
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                loadSidebarState(); // Re-evaluate and apply sidebar state on resize
+            }, 150);
+        });
+
+        // Fullscreen YouTube overlay click to exit (alternative to ESC)
+        youtubeFullscreenOverlay?.addEventListener('click', (e) => {
+             // Only exit if the click is directly on the overlay, not the player inside
+            if (e.target === youtubeFullscreenOverlay) {
+                 const exitBtn = document.querySelector('#exit-fullscreen');
+                 if (exitBtn && !exitBtn.style.display || exitBtn.style.display !== 'none') {
+                     exitBtn.click(); // Trigger the exit button's click handler
+                 } else {
+                    // Fallback if exit button logic fails
+                     hide(youtubeFullscreenOverlay);
+                     youtubeFullscreenContainer.innerHTML = '';
+                     document.body.classList.remove('overflow-hidden');
+                     // Manually reset button visibility in modal if needed
+                     const enterBtnModal = document.querySelector('#youtube-player-container #enter-fullscreen');
+                     const exitBtnModal = document.querySelector('#youtube-player-container #exit-fullscreen');
+                     if(enterBtnModal) show(enterBtnModal);
+                     if(exitBtnModal) hide(exitBtnModal);
+                 }
+            }
+        });
+    }
+
+
+    /* ========= Initialize Application ========= */
+    initializeApp(); // Check login status, load theme, setup initial UI
+    setupEventListeners(); // Attach all event listeners
+
+}); // End DOMContentLoaded
+</script>
+</body>
+</html> 
